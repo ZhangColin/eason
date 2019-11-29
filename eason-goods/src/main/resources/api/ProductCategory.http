@@ -1,0 +1,62 @@
+### 获取产品分类
+GET http://localhost:9002/productCategories/1
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 搜索产品分类
+GET http://localhost:9002/productCategories/search/0/1/10
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 获取指定级别下所有产品分类
+GET http://localhost:9002/productCategories?level=0
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 获取产品分类的属性
+GET http://localhost:9002/productCategories/1/attributes
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 添加产品分类
+POST http://localhost:9002/productCategories
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "name": "cartisan",
+  "parentId": 0,
+  "productUnit": "件",
+  "showNavigation": true,
+  "isShow": true,
+  "icon": "",
+  "keywords": "",
+  "description": "",
+  "sort": 100,
+  "attributeIds": [1,2]
+}
+
+### 更新产品分类
+PUT http://localhost:9002/productCategories/2
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "name": "cartisan",
+  "parentId": 0,
+  "productUnit": "套",
+  "showNavigation": true,
+  "isShow": true,
+  "icon": "",
+  "keywords": "",
+  "description": "",
+  "sort": 100,
+  "attributeIds": [2,3]
+}
+
+### 删除产品分类
+DELETE http://localhost:9002/productCategories/1
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+###

@@ -1,0 +1,13 @@
+server:
+  port: 8761
+eureka:
+  server:
+    enable-self-preservation: true #生产中需要打开
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8762/eureka/
+  instance:
+    prefer-ip-address: true
+    hostname: eason-eureka2

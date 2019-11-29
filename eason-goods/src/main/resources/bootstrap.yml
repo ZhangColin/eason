@@ -1,0 +1,22 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: goods
+  profiles:
+    include: cloud, web, mysql
+    active: dev
+  flyway:
+    enabled: false
+
+
+cartisan:
+  info:
+    title: 商品服务
+    serviceUrl: http://www.eason.com
+    version: 1.0
+    contact:
+      name: colin
+      url: zhang_colin.github.com
+      email: zhang_colin@163.com

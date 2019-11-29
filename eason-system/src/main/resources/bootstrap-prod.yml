@@ -1,0 +1,17 @@
+#spring:
+#  cloud:
+#    config:
+#      enabled: false
+#      discovery:
+#        enabled: true
+#        service-id: config
+#      profile: prod
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eason-eureka:8761/eureka
+
+logging:
+  path: /var/log/eason/system/
+  file: eason-system

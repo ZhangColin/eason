@@ -1,0 +1,42 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  redis:
+    host: localhost
+    port: 6379
+
+#zuul:
+#  routes:
+#    base:
+#      path: /swagger-proxy/base/**
+#      serviceId: base
+#    management:
+#      path: /swagger-proxy/management/**
+#      serviceId: management
+#    myProduct:
+#      path: /myProduct/**
+#      serviceId: cartisan-example-product
+#      # 敏感头的过滤，不会传到后端去，默认是 3 个【Cookie,Set-Cookie,Authorization】，设成空表示不过滤，需要传到后端去
+#      sensitiveHeaders:
+#  # 全部服务忽略敏感头
+#  sensitiveHeaders:
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+ribbon:
+  ReadTimeout: 60000  # 单位毫秒数
+  SocketTimeout: 60000
+
+#server:
+#  ssl:
+#    key-store: classpath:2786492_hsqjp.com.pfx
+#    key-store-password: J9m6gzJ5
+#    key-store-type: PKCS12

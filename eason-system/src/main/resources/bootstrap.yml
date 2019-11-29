@@ -1,0 +1,25 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: system
+  profiles:
+    include: cloud, web, mysql
+    active: dev
+  flyway:
+    enabled: false
+
+
+cartisan:
+  jwt:
+    key: cartisan-jwt
+    ttl: 1800000
+  info:
+    title: 权限认证服务
+    serviceUrl: http://www.eason.com
+    version: 1.0
+    contact:
+      name: colin
+      url: zhang_colin.github.com
+      email: zhang_colin@163.com

@@ -1,0 +1,54 @@
+### 获取品牌
+GET http://localhost:9002/productAttributes/3
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 根据分类查询商品属性
+GET http://localhost:9002/productAttributes/search/1/0/1/10
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 添加商品属性
+POST http://localhost:9002/productAttributes
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "name": "cartisan",
+  "categoryId": 1,
+  "selectType": 0,
+  "inputType": 0,
+  "inputList": "",
+  "filterType": 0,
+  "searchType": 0,
+  "related": 0,
+  "handAdd": 0,
+  "type": 0,
+  "sort": 100
+}
+
+### 更新商品属性
+PUT http://localhost:9002/productAttributes/3
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "name": "cartisan1",
+  "categoryId": 1,
+  "selectType": 0,
+  "inputType": 0,
+  "inputList": "",
+  "filterType": 0,
+  "searchType": 0,
+  "related": 0,
+  "handAdd": 0,
+  "type": 0,
+  "sort": 100
+}
+
+### 删除商品属性
+DELETE http://localhost:9002/productAttributes/3
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+###

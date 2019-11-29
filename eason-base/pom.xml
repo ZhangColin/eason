@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>cartisan-parent</artifactId>
+        <groupId>com.cartisan</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.eason</groupId>
+    <artifactId>eason-base</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <profiles.active>dev</profiles.active>
+    </properties>
+
+    <dependencies>
+        <!-- cartisan 基础库 -->
+        <dependency>
+            <groupId>com.cartisan</groupId>
+            <artifactId>cartisan-cloud</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cartisan</groupId>
+            <artifactId>cartisan-persistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+
+                <configuration>
+                    <locations>
+                        <location>filesystem:src/main/resources/migrations</location>
+                    </locations>
+                    <outOfOrder>false</outOfOrder>
+                    <validateOnMigrate>true</validateOnMigrate>
+                    <cleanOnValidationError>false</cleanOnValidationError>
+                    <baselineOnMigrate>false</baselineOnMigrate>
+                    <baselineVersion>0000</baselineVersion>
+                    <baselineDescription>init baseline</baselineDescription>
+                    <skip>false</skip>
+                    <configFiles>
+                        <configFile>src/main/resources/eason_base_migration_config_${profiles.active}.properties</configFile>
+                    </configFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+<!--    <build>-->
+<!--        <finalName>cartisan-base</finalName>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>com.spotify</groupId>-->
+<!--                <artifactId>docker-maven-plugin</artifactId>-->
+<!--                <version>1.2.0</version>-->
+<!--                <configuration>-->
+<!--                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>-->
+<!--                    <dockerDirectory>src/main/docker</dockerDirectory>-->
+<!--                    <resources>-->
+<!--                        <resource>-->
+<!--                            <targetPath>/</targetPath>-->
+<!--                            <directory>${project.build.directory}</directory>-->
+<!--                            <include>${project.build.finalName}.jar</include>-->
+<!--                        </resource>-->
+<!--                    </resources>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
+</project>
