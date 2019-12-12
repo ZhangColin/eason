@@ -51,7 +51,7 @@ public class ProductCategoryService {
 
     public PageResult<ProductCategoryDto> searchProductCategories(Long parentId, Integer currentPage, Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(currentPage - 1, pageSize,
-                new Sort(Sort.Direction.DESC, "sort"));
+                Sort.by(Sort.Direction.DESC, "sort"));
 
         final Page<ProductCategory> searchResult = repository.findAll((Specification<ProductCategory>) (root, query, criteriaBuilder) -> {
             List<Predicate> predicateList = new ArrayList<>();

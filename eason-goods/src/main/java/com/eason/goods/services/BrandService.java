@@ -43,7 +43,7 @@ public class BrandService {
 
     public PageResult<BrandDto> searchBrands(String name, Integer currentPage, Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(currentPage - 1, pageSize,
-                new Sort(Sort.Direction.DESC, "sort"));
+                Sort.by(Sort.Direction.DESC, "sort"));
 
         final Page<Brand> searchResult = repository.findAll((Specification<Brand>) (root, query, criteriaBuilder) -> {
             List<Predicate> predicateList = new ArrayList<>();

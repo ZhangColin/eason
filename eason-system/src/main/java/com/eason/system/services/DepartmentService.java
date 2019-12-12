@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class DepartmentService {
     }
 
     public List<DepartmentDto> getDepartmentList() {
-        final List<Department> departments = repository.findAll(new Sort(Sort.Direction.ASC, "sort"));
+        final List<Department> departments = repository.findAll(Sort.by(Sort.Direction.ASC, "sort"));
 
         return DepartmentDto.buildDepartmentTreeList(departments);
     }

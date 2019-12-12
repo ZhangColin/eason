@@ -1,15 +1,15 @@
 package com.eason.base.controllers;
 
 import com.cartisan.dtos.PageResult;
-import com.cartisan.responses.GenericResponse;
 import com.eason.base.dtos.AirportDto;
 import com.eason.base.services.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.cartisan.responses.GenericResponse.success;
+import static com.cartisan.responses.ResponseUtil.success;
 
 /**
  * @author colin
@@ -31,7 +31,7 @@ public class AirportController {
     }
 
     @GetMapping("/search/{currentPage}/{pageSize}")
-    public GenericResponse<PageResult<AirportDto>> searchAirports(
+    public ResponseEntity<PageResult<AirportDto>> searchAirports(
             @RequestParam(required = false) Long[] cityIds,
             @PathVariable Integer currentPage,
             @PathVariable Integer pageSize) {

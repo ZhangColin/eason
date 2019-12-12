@@ -7,8 +7,6 @@ spring:
   profiles:
     include: clound, web, mysql
     active: dev
-  flyway:
-    enabled: false
 
 
 cartisan:

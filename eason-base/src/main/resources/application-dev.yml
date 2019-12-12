@@ -7,8 +7,13 @@ spring:
     public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIdafBFEbA+F7zB0RcwPOFzGUSo5tB2ggQh2Ay0MlKjlt9oKFfIHDKzt9jim+mZHONZsgOUktccAb0nFYX4TlikCAwEAAQ==
   jpa:
     show-sql: true
+  flyway:
+    enabled: true
+    schemas: eason_base
+    encoding: utf-8
+    table: schema_base_version
 
-#  rabbitmq:
+  #  rabbitmq:
 #    host: localhost
 #    port: 5672
 #    virtual-host: /eason

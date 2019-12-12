@@ -1,15 +1,15 @@
 package com.eason.base.controllers;
 
 import com.cartisan.dtos.PageResult;
-import com.cartisan.responses.GenericResponse;
 import com.eason.base.dtos.CityDto;
 import com.eason.base.services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.cartisan.responses.GenericResponse.success;
+import static com.cartisan.responses.ResponseUtil.success;
 
 /**
  * @author colin
@@ -26,12 +26,12 @@ public class CityController {
     }
 
     @GetMapping
-    public GenericResponse<List<CityDto>> findCities(@RequestParam Long countryId) {
+    public ResponseEntity<List<CityDto>> findCities(@RequestParam Long countryId) {
         return success(cityService.findCities(countryId));
     }
 
     @GetMapping("/search/{currentPage}/{pageSize}")
-    public GenericResponse<PageResult<CityDto>> searchAirports(
+    public ResponseEntity<PageResult<CityDto>> searchAirports(
             @RequestParam(required = false) Long[] countryIds,
             @RequestParam(required = false) String name,
             @PathVariable Integer currentPage,
