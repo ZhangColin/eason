@@ -1,6 +1,0 @@
-### 获取所有continent
-http://localhost:9001/continent
-Accept: application/json
-Content-Type: application/json;charset=UTF-8
-
-###

@@ -1,0 +1,31 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: eason-membership
+  profiles:
+    include: web, mysql
+    active: local
+
+
+#cartisan:
+#  info:
+#    title: Ekin 后台管理系统
+#    serviceUrl: http://www.cartisan.com
+#    version: 1.0
+#    contact:
+#      name: colin
+#      url: zhang_colin.github.com
+#      email: zhang_colin@163.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
