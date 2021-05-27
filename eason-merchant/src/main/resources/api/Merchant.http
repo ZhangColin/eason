@@ -1,0 +1,57 @@
+### 搜索商户
+GET http://{{host}}:{{port}}/merchants/search?name=&status=&page=0&size=10
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 获取所有启用的商户
+GET http://{{host}}:{{port}}/merchants
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 获取商户
+GET http://{{host}}:{{port}}/merchants/1
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 添加商户
+POST http://{{host}}:{{port}}/merchants
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "account": "colin",
+  "name": "代码小店",
+  "password": "123456",
+  "scope": "承接各种疑难代码",
+  "shopName": "代码小店"
+}
+
+### 编辑商户
+PUT http://{{host}}:{{port}}/merchants/1541326285035409408
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "account": "emily",
+  "name": "代码小店",
+  "password": "123456",
+  "scope": "承接各种疑难代码",
+  "shopName": "代码小店"
+}
+
+### 删除商户
+DELETE http://{{host}}:{{port}}/merchants/2
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 启用商户
+PUT http://{{host}}:{{port}}/merchants/1541326285035409408/enable
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 禁用商户
+PUT http://{{host}}:{{port}}/merchants/1541326285035409408/disable
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+###

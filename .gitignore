@@ -27,3 +27,8 @@
 target/
 
 logs
+spy.log
+
+bootstrap-local.yml
+application-local.yml
+rest-client.private.env.json
