@@ -18,6 +18,6 @@ logging:
     path: /Users/colin/logs/eason/merchant
     name: eason-merchant
   level:
-    com.eason.membership: debug
+    com.eason.merchant: debug
 
 
