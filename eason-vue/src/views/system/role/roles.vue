@@ -28,12 +28,12 @@
         <template slot-scope="scope">
           <el-dropdown split-button @click="handleEdit(scope.$index, scope.row)">
             编辑
-            <el-dropdown-menu slot="dropdown">
+            <el-dropdown-category slot="dropdown">
               <el-dropdown-item @click.native="handlePermissionAssign(scope.$index, scope.row)">授权</el-dropdown-item>
               <el-dropdown-item @click.native="handleDelete(scope.$index, scope.row)">删除</el-dropdown-item>
               <el-dropdown-item v-if="scope.row.status===1" @click.native="handleFrozen(scope.$index, scope.row)">冻结</el-dropdown-item>
               <el-dropdown-item v-else @click.native="handleUnFrozen(scope.$index, scope.row)">解冻</el-dropdown-item>
-            </el-dropdown-menu>
+            </el-dropdown-category>
           </el-dropdown>
         </template>
       </el-table-column>

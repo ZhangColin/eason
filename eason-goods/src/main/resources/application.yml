@@ -1,16 +1,16 @@
 server:
-  port: 9003
+  port: 9002
 
 spring:
   application:
-    name: eason-merchant
+    name: eason-goods
   profiles:
     include: web, mysql
     active: local
 
 cartisan:
   info:
-    title: Eason Merchant
+    title: Eason Goods
     serviceUrl: http://www.cartisan.com
     version: 1.0
     contact:

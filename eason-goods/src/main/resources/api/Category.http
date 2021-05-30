@@ -1,0 +1,37 @@
+### 获取所有商品分类
+GET http://{{host}}:{{port}}/categories
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Authorization: {{auth_token}}
+
+### 添加商品分类
+POST http://{{host}}:{{port}}/categories
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Authorization: {{auth_token}}
+
+{
+  "name": "图书",
+  "parentId": 0,
+  "sort": 1
+}
+
+### 编辑商品分类
+PUT http://{{host}}:{{port}}/categories/1
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Authorization: {{auth_token}}
+
+{
+  "name": "图书1",
+  "parentId": 0,
+  "sort": 1
+}
+
+### 删除商品分类
+DELETE http://{{host}}:{{port}}/categories/1
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Authorization: {{auth_token}}
+
+###

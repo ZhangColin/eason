@@ -12,7 +12,6 @@ import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -50,8 +49,7 @@ public class MerchantAppService {
         final MerchantQuery merchantQuery = new MerchantQuery();
         merchantQuery.setStatus(1);
 
-        return merchantConverter.convert(repository.findAll(querySpecification(merchantQuery),
-                Sort.by(Sort.Direction.ASC, "sort")));
+        return merchantConverter.convert(repository.findAll(querySpecification(merchantQuery)));
     }
 
     public MerchantDto getMerchant(Long id) {

@@ -1,8 +1,8 @@
 <template>
-  <div :class="{active:isActive}" class="share-dropdown-menu">
-    <div class="share-dropdown-menu-wrapper">
-      <span class="share-dropdown-menu-title" @click.self="clickTitle">{{ title }}</span>
-      <div v-for="(item,index) of items" :key="index" class="share-dropdown-menu-item">
+  <div :class="{active:isActive}" class="share-dropdown-category">
+    <div class="share-dropdown-category-wrapper">
+      <span class="share-dropdown-category-title" @click.self="clickTitle">{{ title }}</span>
+      <div v-for="(item,index) of items" :key="index" class="share-dropdown-category-item">
         <a v-if="item.href" :href="item.href" target="_blank">{{ item.title }}</a>
         <span v-else>{{ item.title }}</span>
       </div>
@@ -40,7 +40,7 @@ export default {
 <style lang="scss" >
 $n: 9; //和items.length 相同
 $t: .1s;
-.share-dropdown-menu {
+.share-dropdown-category {
   width: 250px;
   position: relative;
   z-index: 1;
@@ -84,10 +84,10 @@ $t: .1s;
     }
   }
   &.active {
-    .share-dropdown-menu-wrapper {
+    .share-dropdown-category-wrapper {
       z-index: 1;
     }
-    .share-dropdown-menu-item {
+    .share-dropdown-category-item {
       @for $i from 1 through $n {
         &:nth-of-type(#{$i}) {
           transition-delay: ($n - $i)*$t;

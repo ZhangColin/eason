@@ -4,26 +4,26 @@
 
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
 
-    <div class="right-menu">
+    <div class="right-category">
       <template v-if="device!=='mobile'">
-        <search id="header-search" class="right-menu-item" />
+        <search id="header-search" class="right-category-item" />
 
-        <error-log class="errLog-container right-menu-item hover-effect" />
+        <error-log class="errLog-container right-category-item hover-effect" />
 
-        <screenfull id="screenfull" class="right-menu-item hover-effect" />
+        <screenfull id="screenfull" class="right-category-item hover-effect" />
 
         <el-tooltip content="Global Size" effect="dark" placement="bottom">
-          <size-select id="size-select" class="right-menu-item hover-effect" />
+          <size-select id="size-select" class="right-category-item hover-effect" />
         </el-tooltip>
 
       </template>
 
-      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+      <el-dropdown class="avatar-container right-category-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
-        <el-dropdown-menu slot="dropdown">
+        <el-dropdown-category slot="dropdown">
           <router-link to="/profile/index">
             <el-dropdown-item>Profile</el-dropdown-item>
           </router-link>
@@ -39,7 +39,7 @@
           <el-dropdown-item divided>
             <span style="display:block;" @click="logout">Log Out</span>
           </el-dropdown-item>
-        </el-dropdown-menu>
+        </el-dropdown-category>
       </el-dropdown>
     </div>
   </div>
@@ -112,7 +112,7 @@ export default {
     vertical-align: top;
   }
 
-  .right-menu {
+  .right-category {
     float: right;
     height: 100%;
     line-height: 50px;
@@ -121,7 +121,7 @@ export default {
       outline: none;
     }
 
-    .right-menu-item {
+    .right-category-item {
       display: inline-block;
       padding: 0 8px;
       height: 100%;
