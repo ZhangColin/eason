@@ -9,11 +9,15 @@ import lombok.Data;
  */
 @Data
 public class ProductQuery {
-    @ApiModelProperty(value = "根据资源名称、权限编码、Url模糊查询")
-    @Condition(blurry = "name,code,url")
+    @ApiModelProperty(value = "根据标题模糊查询")
+    @Condition(propName = "title", type=Condition.Type.LEFT_LIKE)
     private String blurry;
 
-    @ApiModelProperty(value = "资源分类")
+    @ApiModelProperty(value = "产品分类")
     @Condition(propName = "categoryId", type = Condition.Type.EQUAL)
     private Long categoryId;
+
+    @ApiModelProperty(value = "供应商")
+    @Condition(propName = "merchantId", type = Condition.Type.EQUAL)
+    private Long merchantId;
 }

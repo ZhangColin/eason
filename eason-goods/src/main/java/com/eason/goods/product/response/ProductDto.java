@@ -1,31 +1,33 @@
 package com.eason.goods.product.response;
 
 import com.eason.goods.category.CategoryDto;
+import com.eason.goods.product.ProductCategoryVerify;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author colin
  */
 @Data
 public class ProductDto {
-    @ApiModelProperty(value = "资源Id")
+    @ApiModelProperty(value = "产品Id")
     private String id;
 
-    @ApiModelProperty(value = "资源名称")
-    private String name;
-
+    @ApiModelProperty(value = "产品分类")
     private CategoryDto category;
 
-    @ApiModelProperty(value = "权限编码")
-    private String code;
+    @ApiModelProperty(value = "供应商")
+    private Long merchantId;
 
-    @ApiModelProperty(value = "Url")
-    private String url;
+    @ApiModelProperty(value = "标题")
+    private String title;
 
-    @ApiModelProperty(value = "资源描述")
-    private String description;
+    @ApiModelProperty(value = "图片")
+    private String pictureUrl;
 
-    @ApiModelProperty(value = "资源排序")
-    private Integer sort;
+    @ApiModelProperty(value = "价格")
+    private Integer price;
 }

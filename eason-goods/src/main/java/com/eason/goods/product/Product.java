@@ -58,7 +58,7 @@ public class Product extends AbstractEntity implements AggregateRoot {
         this.auditStatus = 0;
     }
 
-    public void describe( Long categoryId, Long merchantId, String title, String pictureUrl, Integer price) {
+    public void describe(Long categoryId, Long merchantId, String title, String pictureUrl, Integer price) {
         this.categoryId = categoryId;
         this.merchantId = merchantId;
         this.title = title;
@@ -66,14 +66,14 @@ public class Product extends AbstractEntity implements AggregateRoot {
         this.price = price;
     }
 
-    public void stock(Integer number){
-        this.stockNumber+=number;
+    public void stock(Integer number) {
+        this.stockNumber += number;
     }
 
-    public void sell(Integer number){
-        if (this.stockNumber>=number){
-            this.stockNumber-=number;
-            this.sellNumber+=number;
+    public void sell(Integer number) {
+        if (this.stockNumber >= number) {
+            this.stockNumber -= number;
+            this.sellNumber += number;
         }
     }
 

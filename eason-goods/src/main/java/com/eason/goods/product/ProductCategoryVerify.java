@@ -33,7 +33,7 @@ public @interface ProductCategoryVerify {
         @Override
         public boolean isValid(Long value, ConstraintValidatorContext context) {
             return categoryAppService.getAllCategories().stream()
-                    .anyMatch(resourceCategoryDto -> resourceCategoryDto.getId().equals(value.toString()));
+                    .anyMatch(productCategoryDto -> productCategoryDto.getId().equals(value.toString()));
         }
     }
 }

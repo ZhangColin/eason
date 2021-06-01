@@ -1,0 +1,42 @@
+### 搜索产品
+GET http://{{host}}:{{port}}/products/search
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 获取所有产品
+GET http://{{host}}:{{port}}/products
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 添加产品
+POST http://{{host}}:{{port}}/products
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "categoryId": 2,
+  "merchantId": 1,
+  "pictureUrl": "",
+  "price": 0,
+  "title": "DDD入门"
+}
+
+### 编辑产品
+PUT http://{{host}}:{{port}}/products/1
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "categoryId": 1,
+  "merchantId": 1,
+  "pictureUrl": "",
+  "price": 0,
+  "title": "DDD入门"
+}
+
+### 删除产品
+DELETE http://{{host}}:{{port}}/products/1
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+###

@@ -1,10 +1,9 @@
 package com.eason.goods.product.request;
 
+import com.eason.goods.product.ProductCategoryVerify;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -13,28 +12,22 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class ProductParam {
-    @ApiModelProperty(value = "资源名称", required = true)
-    @NotBlank(message = "资源名称不能为空")
-    @Length(min = 2, max = 32, message = "资源名称必须在 2 至 32 之间")
-    private String name;
-
-    @ApiModelProperty(value = "资源分类", required = true)
-    @NotNull(message = "资源分类不能为空")
-    @ResourceCategoryVerify
+    @ApiModelProperty(value = "产品分类", required = true)
+    @NotNull(message = "产品分类不能为空")
+    @ProductCategoryVerify
     private Long categoryId;
 
-    @ApiModelProperty(value = "权限编码", required = true)
-    @NotBlank(message = "权限编码不能为空")
-    private String code;
+    @ApiModelProperty(value = "供应商", required = true)
+//    @NotBlank(message = "供应商不能为空")
+    private Long merchantId;
 
-    @ApiModelProperty(value = "Url")
-    private String url;
+    @ApiModelProperty(value = "标题", required = true)
+    @NotBlank(message = "标题不能为空")
+    private String title;
 
-    @ApiModelProperty(value = "资源描述")
-    private String description;
+    @ApiModelProperty(value = "图片")
+    private String pictureUrl;
 
-    @ApiModelProperty(value = "资源排序")
-    @NotNull(message = "资源排序不能为空")
-    @Min(value = 0, message = "排序最小为0")
-    private Integer sort;
+    @ApiModelProperty(value = "价格", required = true)
+    private Integer price;
 }

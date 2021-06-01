@@ -1,10 +1,9 @@
 package com.eason.goods.product;
 
 import com.cartisan.dtos.PageResult;
-import com.ekin.system.resource.application.ResourceAppService;
-import com.ekin.system.resource.request.ResourceParam;
-import com.ekin.system.resource.request.ResourceQuery;
-import com.ekin.system.resource.response.ResourceDto;
+import com.eason.goods.product.request.ProductParam;
+import com.eason.goods.product.request.ProductQuery;
+import com.eason.goods.product.response.ProductDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -15,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 import static com.cartisan.responses.ResponseUtil.success;
@@ -22,9 +22,9 @@ import static com.cartisan.responses.ResponseUtil.success;
 /**
  * @author colin
  */
-@Api(tags = "系统管理：资源")
+@Api(tags = "产品")
 @RestController
-@RequestMapping("/system/resources")
+@RequestMapping("/products")
 @Validated
 @Slf4j
 public class ProductController {
@@ -34,40 +34,40 @@ public class ProductController {
         this.service = service;
     }
 
-    @ApiOperation(value = "搜索资源")
+    @ApiOperation(value = "搜索产品")
     @GetMapping("/search")
-    public ResponseEntity<PageResult<ResourceDto>> searchUsers(
-            @ApiParam(value = "查询参数") ResourceQuery resourceQuery,
+    public ResponseEntity<PageResult<ProductDto>> searchUsers(
+            @ApiParam(value = "查询参数") ProductQuery productQuery,
             @PageableDefault Pageable pageable) {
-        return success(service.searchResources(resourceQuery, pageable));
+        return success(service.searchProducts(productQuery, pageable));
     }
 
-    @ApiOperation(value = "获取所有资源")
+    @ApiOperation(value = "获取所有产品")
     @GetMapping
-    public ResponseEntity<List<ResourceDto>> getAllResources(){
-        return success(service.getAllResources());
+    public ResponseEntity<List<ProductDto>> getAllProducts(){
+        return success(service.getAllProducts());
     }
 
-    @ApiOperation(value = "添加资源")
+    @ApiOperation(value = "添加产品")
     @PostMapping
-    public ResponseEntity<ResourceDto> addResource(
-            @ApiParam(value = "资源信息", required = true) @Validated @RequestBody ResourceParam resourceParam) {
-        return success(service.addResource(resourceParam));
+    public ResponseEntity<ProductDto> addProduct(
+            @ApiParam(value = "产品信息", required = true) @Validated @RequestBody ProductParam productParam) {
+        return success(service.addProduct(productParam));
     }
 
-    @ApiOperation(value = "编辑资源")
+    @ApiOperation(value = "编辑产品")
     @PutMapping("/{id}")
-    public ResponseEntity<ResourceDto> editResource(
-            @ApiParam(value = "资源Id", required = true) @PathVariable Long id,
-            @ApiParam(value = "资源信息", required = true) @Validated @RequestBody ResourceParam resourceParam) {
-        return success(service.editResource(id, resourceParam));
+    public ResponseEntity<ProductDto> editProduct(
+            @ApiParam(value = "产品Id", required = true) @PathVariable Long id,
+            @ApiParam(value = "产品信息", required = true) @Validated @RequestBody ProductParam productParam) {
+        return success(service.editProduct(id, productParam));
     }
 
-    @ApiOperation(value = "删除资源")
+    @ApiOperation(value = "删除产品")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> removeResource(
-            @ApiParam(value = "资源Id", required = true) @PathVariable long id) {
-        service.removeResource(id);
+    public ResponseEntity<?> removeProduct(
+            @ApiParam(value = "产品Id", required = true) @PathVariable long id) {
+        service.removeProduct(id);
         return success();
     }
 }
