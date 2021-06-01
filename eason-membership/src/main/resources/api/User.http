@@ -1,0 +1,62 @@
+### 搜索用户
+GET http://{{host}}:{{port}}/users/search?name=&status=&page=0&size=10
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 获取所有启用的用户
+GET http://{{host}}:{{port}}/users
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 获取用户
+GET http://{{host}}:{{port}}/users/1
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 添加用户
+POST http://{{host}}:{{port}}/users
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "account": "colin",
+  "address": "航头镇",
+  "age": 0,
+  "email": "stwyhm@126.com",
+  "name": "文野",
+  "password": "123456",
+  "qq": "",
+  "sex": "",
+  "telphone": "",
+  "weixin": ""
+}
+
+### 编辑用户
+PUT http://{{host}}:{{port}}/users/1541326285035409408
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "account": "emily",
+  "name": "代码小店",
+  "password": "123456",
+  "scope": "承接各种疑难代码",
+  "shopName": "代码小店"
+}
+
+### 删除用户
+DELETE http://{{host}}:{{port}}/users/2
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 启用用户
+PUT http://{{host}}:{{port}}/users/1541326285035409408/enable
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+### 禁用用户
+PUT http://{{host}}:{{port}}/users/1541326285035409408/disable
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+###

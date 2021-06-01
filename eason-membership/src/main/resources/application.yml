@@ -9,15 +9,15 @@ spring:
     active: local
 
 
-#cartisan:
-#  info:
-#    title: Ekin 后台管理系统
-#    serviceUrl: http://www.cartisan.com
-#    version: 1.0
-#    contact:
-#      name: colin
-#      url: zhang_colin.github.com
-#      email: zhang_colin@163.com
+cartisan:
+  info:
+    title: Eason Membership
+    serviceUrl: http://www.cartisan.com
+    version: 1.0
+    contact:
+      name: colin
+      url: zhang_colin.github.com
+      email: zhang_colin@163.com
 
 management:
   endpoints:

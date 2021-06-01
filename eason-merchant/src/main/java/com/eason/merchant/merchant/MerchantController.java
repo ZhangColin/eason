@@ -21,7 +21,7 @@ import static com.cartisan.responses.ResponseUtil.success;
 /**
  * @author colin
  */
-@Api(tags = "系统管理：商户")
+@Api(tags = "商户")
 @RestController
 @RequestMapping("/merchants")
 @Validated
