@@ -1,9 +1,9 @@
 server:
-  port: 9004
+  port: 9003
 
 spring:
   application:
-    name: eason-merchant
+    name: eason-order
   profiles:
     include: web, mysql
     active: local

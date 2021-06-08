@@ -14,13 +14,13 @@ CREATE TABLE `ms_accounts` (
   UNIQUE INDEX `index_account_user_name`(`username`),
   INDEX `index_account_status`(`status`),
   INDEX `index_account_soft_deleted`(`active`, `deleted`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='账户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='账户';
 
 
 INSERT INTO `ms_accounts` (`id`, `username`, `password`,  `status`)
 VALUES (1265586318612762624, 'colin', '$2a$10$1OUc.r.DmlMKTPiXwhhWw.Sr0McOHHLOCNd6/Wgia7oeHgRjCOYeq', 1);
 
--- 账户表
+-- 用户表
 CREATE TABLE `ms_users` (
    `id` bigint NOT NULL COMMENT '账户Id',
    `name` varchar(32) NOT NULL COMMENT '登录账号',
@@ -36,4 +36,4 @@ CREATE TABLE `ms_users` (
    `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
    PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='账户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户';

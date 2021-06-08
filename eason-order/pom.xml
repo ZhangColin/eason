@@ -11,7 +11,7 @@
   </parent>
 
   <groupId>com.eason</groupId>
-  <artifactId>eason-merchant</artifactId>
+  <artifactId>eason-order</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
@@ -78,4 +78,5 @@
       </plugin>
     </plugins>
   </build>
+
 </project>
