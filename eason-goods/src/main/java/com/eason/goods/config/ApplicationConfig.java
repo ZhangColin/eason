@@ -3,6 +3,7 @@ package com.eason.goods.config;
 import com.cartisan.repositories.CartisanRepositoryFactoryBean;
 import com.cartisan.utils.SnowflakeIdWorker;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -14,6 +15,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = {"com.eason.goods"},
         repositoryFactoryBeanClass = CartisanRepositoryFactoryBean.class)
 @MapperScan("com.eason.goods.**.mapper")
+@EnableCaching
 public class ApplicationConfig {
     @Bean
     public SnowflakeIdWorker idWorker() {

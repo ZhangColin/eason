@@ -7,6 +7,9 @@ spring:
   profiles:
     include: web, mysql
     active: local
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
 
 cartisan:
   info:

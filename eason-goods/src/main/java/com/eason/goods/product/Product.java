@@ -4,12 +4,19 @@ import com.cartisan.domains.AbstractEntity;
 import com.cartisan.domains.AggregateRoot;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * @author colin
- */
+import java.lang.Long;
+import java.lang.String;
+import java.lang.Integer;
+
+import static java.util.stream.Collectors.toList;
+
 @Entity
 @Table(name = "gds_products")
 @Getter
@@ -43,45 +50,43 @@ public class Product extends AbstractEntity implements AggregateRoot {
     @Column(name = "audit_status")
     private Integer auditStatus;
 
-    private Product() {
-    }
+    private Product() {}
 
-    public Product(Long id, Long categoryId, Long merchantId, String title, String pictureUrl, Integer price) {
+    public Product(Long id,
+        Long categoryId,
+        Long merchantId,
+        String title,
+        String pictureUrl,
+        Integer price,
+        Integer stockNumber,
+        Integer sellNumber,
+        Integer auditStatus) {
         this.id = id;
         this.categoryId = categoryId;
         this.merchantId = merchantId;
         this.title = title;
         this.pictureUrl = pictureUrl;
         this.price = price;
-        this.stockNumber = 0;
-        this.sellNumber = 0;
-        this.auditStatus = 0;
+        this.stockNumber = stockNumber;
+        this.sellNumber = sellNumber;
+        this.auditStatus = auditStatus;
     }
 
-    public void describe(Long categoryId, Long merchantId, String title, String pictureUrl, Integer price) {
+    public void describe(Long categoryId,
+        Long merchantId,
+        String title,
+        String pictureUrl,
+        Integer price,
+        Integer stockNumber,
+        Integer sellNumber,
+        Integer auditStatus) {
         this.categoryId = categoryId;
         this.merchantId = merchantId;
         this.title = title;
         this.pictureUrl = pictureUrl;
         this.price = price;
-    }
-
-    public void stock(Integer number) {
-        this.stockNumber += number;
-    }
-
-    public void sell(Integer number) {
-        if (this.stockNumber >= number) {
-            this.stockNumber -= number;
-            this.sellNumber += number;
-        }
-    }
-
-    public void allow() {
-        this.auditStatus = 1;
-    }
-
-    public void deny() {
-        this.auditStatus = 0;
+        this.stockNumber = stockNumber;
+        this.sellNumber = sellNumber;
+        this.auditStatus = auditStatus;
     }
 }

@@ -7,17 +7,18 @@ import lombok.Getter;
 
 import javax.persistence.*;
 
-/**
- * @author colin
- */
+import java.lang.Long;
+import java.lang.String;
+import java.lang.Integer;
+
 @Entity
 @Table(name = "gds_product_categories")
 @Getter
 @EqualsAndHashCode(callSuper = true)
-public class Category extends AbstractEntity implements AggregateRoot {
+public class ProductCategory extends AbstractEntity implements AggregateRoot {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "parent_id")
@@ -32,17 +33,22 @@ public class Category extends AbstractEntity implements AggregateRoot {
     @Column(name = "sort")
     private Integer sort;
 
-    private Category() {
-    }
+    private ProductCategory() {}
 
-    public Category(Long parentId, String name, Integer level, Integer sort) {
+    public ProductCategory(Long parentId,
+        String name,
+        Integer level,
+        Integer sort) {
         this.parentId = parentId;
         this.name = name;
         this.level = level;
         this.sort = sort;
     }
 
-    public void change(Long parentId, String name, Integer level, Integer sort) {
+    public void describe(Long parentId,
+        String name,
+        Integer level,
+        Integer sort) {
         this.parentId = parentId;
         this.name = name;
         this.level = level;
