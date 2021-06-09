@@ -1,70 +1,85 @@
 package com.eason.merchant.merchant;
 
+import com.cartisan.domains.AbstractEntity;
 import com.cartisan.domains.AggregateRoot;
-import com.cartisan.domains.SoftDeleteEntity;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * @author colin
- */
+import java.lang.Long;
+import java.lang.String;
+import java.lang.Integer;
+
+import static java.util.stream.Collectors.toList;
+
 @Entity
 @Table(name = "mch_merchants")
 @Getter
 @EqualsAndHashCode(callSuper = true)
-@Where(clause = "active=1 and deleted=0")
-public class Merchant extends SoftDeleteEntity implements AggregateRoot {
+public class Merchant extends AbstractEntity implements AggregateRoot {
     @Id
     @Column(name = "id")
     private Long id;
 
     @Column(name = "name")
     private String name;
+
     @Column(name = "shop_name")
     private String shopName;
+
     @Column(name = "account")
     private String account;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "scope")
     private String scope;
+
     @Column(name = "status")
-    private int status;
+    private Integer status;
 
-    private Merchant() {
-    }
+    @Column(name = "audit_status")
+    private Integer auditStatus;
 
-    public Merchant(Long id, String name, String shopName, String account, String password, String scope) {
+    private Merchant() {}
+
+    public Merchant(Long id,
+        String name,
+        String shopName,
+        String account,
+        String password,
+        String scope,
+        Integer status,
+        Integer auditStatus) {
         this.id = id;
         this.name = name;
         this.shopName = shopName;
         this.account = account;
         this.password = password;
         this.scope = scope;
-
-        this.status = 1;
+        this.status = status;
+        this.auditStatus = auditStatus;
     }
 
-    public void describe(String name, String shopName, String account, String password, String scope) {
+    public void describe(String name,
+        String shopName,
+        String account,
+        String password,
+        String scope,
+        Integer status,
+        Integer auditStatus) {
         this.name = name;
         this.shopName = shopName;
         this.account = account;
         this.password = password;
         this.scope = scope;
-    }
-
-    public void enable() {
-        this.status = 1;
-    }
-
-    public void disable() {
-        this.status = 0;
+        this.status = status;
+        this.auditStatus = auditStatus;
     }
 }

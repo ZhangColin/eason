@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.lang.Long;
+import java.util.Date;
 import java.lang.String;
 import java.lang.Integer;
 
@@ -33,7 +34,13 @@ public class ProductDto {
     @ApiModelProperty(value = "销量")
     private Integer sellNumber;
 
-    @ApiModelProperty(value = "审核状态")
+    @ApiModelProperty(value = "审核状态，0 未审核 1 审核通过 2 审核不通过")
     private Integer auditStatus;
+
+    @ApiModelProperty(value = "审核时间")
+    private Date audited;
+
+    @ApiModelProperty(value = "产品状态，0 下架 1 h 架")
+    private Integer status;
 
 }

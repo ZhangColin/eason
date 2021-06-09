@@ -17,7 +17,7 @@ import java.util.List;
 
 import static com.cartisan.responses.ResponseUtil.success;
 
-@Api(tags = "产品：产品")
+@Api(tags = "商品：产品")
 @RestController
 @RequestMapping("/products")
 @Validated

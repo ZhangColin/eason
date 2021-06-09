@@ -12,7 +12,7 @@ public class OrderDto {
     @ApiModelProperty(value = "订单Id")
     private Long id;
 
-    @ApiModelProperty(value = "订单Id")
+    @ApiModelProperty(value = "用户Id")
     private Long userId;
 
     @ApiModelProperty(value = "支付金额")
@@ -27,13 +27,13 @@ public class OrderDto {
     @ApiModelProperty(value = "收件人姓名")
     private String consigneeName;
 
-    @ApiModelProperty(value = "物流单号")
+    @ApiModelProperty(value = "交易流水号")
     private String tradeNumber;
 
-    @ApiModelProperty(value = "订单状态")
+    @ApiModelProperty(value = "订单状态，0 正常 1 取消")
     private Integer orderStatus;
 
-    @ApiModelProperty(value = "支付状态")
+    @ApiModelProperty(value = "支付状态，1未支付 2已支付 3已退款")
     private Integer payStatus;
 
 }

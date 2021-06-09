@@ -25,7 +25,7 @@ CREATE TABLE `gds_products` (
   `sell_number` int NOT NULL COMMENT '销量',
   `audit_status` tinyint NOT NULL DEFAULT 1 COMMENT '审核状态，0 未审核 1 审核通过 2 审核不通过',
   `audited` datetime NULL COMMENT '审核时间',
-  `status` tinyint NOT NULL DEFAULT 1 COMMENT '产品状态，0 下架 1 h 架',
+  `status` tinyint NOT NULL DEFAULT 1 COMMENT '产品状态，0 下架 1 上架',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,

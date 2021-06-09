@@ -23,7 +23,7 @@ CREATE TABLE `ord_orders` (
 -- 订单项表
 CREATE TABLE `ord_order_items` (
   `id` bigint NOT NULL COMMENT '主键',
-  `order_id` bigint NOT NULL COMMENT '订单Id',items
+  `order_id` bigint NOT NULL COMMENT '订单Id',
   `product_id` bigint NOT NULL COMMENT '产品Id',
   `merchant_id` bigint NOT NULL COMMENT '供应商Id',
   `trade_number` varchar(64) NOT NULL DEFAULT '' COMMENT '交易流水号',

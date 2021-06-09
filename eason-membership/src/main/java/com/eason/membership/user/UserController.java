@@ -1,9 +1,8 @@
 package com.eason.membership.user;
 
+import com.cartisan.constants.CodeMessage;
 import com.cartisan.dtos.PageResult;
-import com.eason.membership.user.request.UserParam;
-import com.eason.membership.user.request.UserQuery;
-import com.eason.membership.user.response.UserDto;
+import com.cartisan.exceptions.CartisanException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -18,10 +17,7 @@ import java.util.List;
 
 import static com.cartisan.responses.ResponseUtil.success;
 
-/**
- * @author colin
- */
-@Api(tags = "用户")
+@Api(tags = "会员：用户")
 @RestController
 @RequestMapping("/users")
 @Validated
@@ -39,12 +35,6 @@ public class UserController {
             @ApiParam(value = "查询参数") UserQuery userQuery,
             @PageableDefault Pageable pageable) {
         return success(service.searchUsers(userQuery, pageable));
-    }
-
-    @ApiOperation(value = "获取所有启用的用户")
-    @GetMapping
-    public ResponseEntity<List<UserDto>> getUsers(){
-        return success(service.getUsers());
     }
 
     @ApiOperation(value = "获取用户")
@@ -71,7 +61,7 @@ public class UserController {
     @ApiOperation(value = "删除用户")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> removeUser(
-            @ApiParam(value = "用户Id", required = true) @PathVariable long id) {
+            @ApiParam(value = "用户Id", required = true) @PathVariable Long id) {
         service.removeUser(id);
         return success();
     }

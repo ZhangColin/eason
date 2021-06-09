@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.lang.Long;
+import java.util.Date;
 import java.lang.String;
 import java.lang.Integer;
 
@@ -50,6 +51,12 @@ public class Product extends AbstractEntity implements AggregateRoot {
     @Column(name = "audit_status")
     private Integer auditStatus;
 
+    @Column(name = "audited")
+    private Date audited;
+
+    @Column(name = "status")
+    private Integer status;
+
     private Product() {}
 
     public Product(Long id,
@@ -60,7 +67,9 @@ public class Product extends AbstractEntity implements AggregateRoot {
         Integer price,
         Integer stockNumber,
         Integer sellNumber,
-        Integer auditStatus) {
+        Integer auditStatus,
+        Date audited,
+        Integer status) {
         this.id = id;
         this.categoryId = categoryId;
         this.merchantId = merchantId;
@@ -70,6 +79,8 @@ public class Product extends AbstractEntity implements AggregateRoot {
         this.stockNumber = stockNumber;
         this.sellNumber = sellNumber;
         this.auditStatus = auditStatus;
+        this.audited = audited;
+        this.status = status;
     }
 
     public void describe(Long categoryId,
@@ -79,7 +90,9 @@ public class Product extends AbstractEntity implements AggregateRoot {
         Integer price,
         Integer stockNumber,
         Integer sellNumber,
-        Integer auditStatus) {
+        Integer auditStatus,
+        Date audited,
+        Integer status) {
         this.categoryId = categoryId;
         this.merchantId = merchantId;
         this.title = title;
@@ -88,5 +101,7 @@ public class Product extends AbstractEntity implements AggregateRoot {
         this.stockNumber = stockNumber;
         this.sellNumber = sellNumber;
         this.auditStatus = auditStatus;
+        this.audited = audited;
+        this.status = status;
     }
 }

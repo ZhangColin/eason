@@ -1,6 +1,8 @@
-package com.eason.goods.category;
+package com.eason.goods.productCategory;
 
+import com.cartisan.constants.CodeMessage;
 import com.cartisan.dtos.PageResult;
+import com.cartisan.exceptions.CartisanException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -11,9 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.cartisan.responses.ResponseUtil.success;
 
-@Api(tags = "产品：产品分类")
+@Api(tags = "商品：产品分类")
 @RestController
 @RequestMapping("/productCategories")
 @Validated

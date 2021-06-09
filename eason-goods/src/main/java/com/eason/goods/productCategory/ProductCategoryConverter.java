@@ -1,4 +1,4 @@
-package com.eason.goods.category;
+package com.eason.goods.productCategory;
 
 import com.cartisan.dtos.Converter;
 import org.mapstruct.Mapper;

@@ -1,4 +1,4 @@
-package com.eason.order.orderDetail;
+package com.eason.order.orderItem;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.lang.Long;
 import java.lang.String;
 
 @Data
-public class OrderDetailParam {
+public class OrderItemParam {
     @ApiModelProperty(value = "订单Id")
     private Long orderId;
 
@@ -22,7 +22,7 @@ public class OrderDetailParam {
     @ApiModelProperty(value = "供应商Id")
     private Long merchantId;
 
-    @ApiModelProperty(value = "物流单号")
+    @ApiModelProperty(value = "交易流水号")
     private String tradeNumber;
 
 }

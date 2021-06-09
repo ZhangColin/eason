@@ -1,4 +1,4 @@
-package com.eason.order.orderDetail;
+package com.eason.order.orderItem;
 
 import com.cartisan.domains.AbstractEntity;
 import com.cartisan.domains.AggregateRoot;
@@ -17,10 +17,10 @@ import java.lang.String;
 import static java.util.stream.Collectors.toList;
 
 @Entity
-@Table(name = "ord_order_details")
+@Table(name = "ord_order_items")
 @Getter
 @EqualsAndHashCode(callSuper = true)
-public class OrderDetail extends AbstractEntity implements AggregateRoot {
+public class OrderItem extends AbstractEntity implements AggregateRoot {
     @Id
     @Column(name = "id")
     private Long id;
@@ -37,9 +37,9 @@ public class OrderDetail extends AbstractEntity implements AggregateRoot {
     @Column(name = "trade_number")
     private String tradeNumber;
 
-    private OrderDetail() {}
+    private OrderItem() {}
 
-    public OrderDetail(Long id,
+    public OrderItem(Long id,
         Long orderId,
         Long productId,
         Long merchantId,

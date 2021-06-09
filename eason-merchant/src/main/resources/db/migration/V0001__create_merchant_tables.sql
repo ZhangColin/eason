@@ -7,6 +7,7 @@ CREATE TABLE `mch_merchants` (
   `password` varchar(64) NOT NULL COMMENT '密码',
   `scope` varchar(256) NOT NULL COMMENT '经营范围',
   `status` tinyint NOT NULL DEFAULT 1 COMMENT '状态(0：禁用  2：启用 ）',
+  `audit_status` tinyint NOT NULL DEFAULT 1 COMMENT '审核状态，1 提交成功 2 审核通过 3 审核不通过',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `active` bit(1) NOT NULL DEFAULT b'1',

@@ -1,24 +1,24 @@
 package com.eason.goods.product;
 
+import com.cartisan.constants.CodeMessage;
 import com.cartisan.dtos.PageResult;
-import com.cartisan.utils.SnowflakeIdWorker;
+import com.cartisan.exceptions.CartisanException;
 import lombok.NonNull;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.cartisan.utils.SnowflakeIdWorker;
+
 import javax.transaction.Transactional;
+import java.util.List;
 
 import static com.cartisan.repositories.ConditionSpecifications.querySpecification;
 import static com.cartisan.utils.AssertionUtil.requirePresent;
+import static java.util.stream.Collectors.toList;
 
 @Service
-@CacheConfig(cacheNames = "ProductCache")
 public class ProductAppService {
     private final ProductRepository repository;
     private final SnowflakeIdWorker idWorker;
@@ -38,13 +38,11 @@ public class ProductAppService {
                 converter.convert(searchResult.getContent()));
     }
 
-    @Cacheable
     public ProductDto getProduct(Long id) {
         return converter.convert(requirePresent(repository.findById(id)));
     }
 
     @Transactional(rollbackOn = Exception.class)
-//    @Cacheable(key = "#id")
     public ProductDto addProduct(ProductParam productParam) {
         final Product product = new Product(idWorker.nextId(),
         productParam.getCategoryId(),
@@ -54,13 +52,14 @@ public class ProductAppService {
         productParam.getPrice(),
         productParam.getStockNumber(),
         productParam.getSellNumber(),
-        productParam.getAuditStatus());
+        productParam.getAuditStatus(),
+        productParam.getAudited(),
+        productParam.getStatus());
 
         return converter.convert(repository.save(product));
     }
 
     @Transactional(rollbackOn = Exception.class)
-    @CachePut(key = "#id")
     public ProductDto editProduct(Long id, ProductParam productParam) {
         final Product product = requirePresent(repository.findById(id));
 
@@ -71,13 +70,14 @@ public class ProductAppService {
         productParam.getPrice(),
         productParam.getStockNumber(),
         productParam.getSellNumber(),
-        productParam.getAuditStatus());
+        productParam.getAuditStatus(),
+        productParam.getAudited(),
+        productParam.getStatus());
 
         return converter.convert(repository.save(product));
     }
 
     @Transactional(rollbackOn = Exception.class)
-    @CacheEvict
     public void removeProduct(long id) {
         repository.deleteById(id);
     }
