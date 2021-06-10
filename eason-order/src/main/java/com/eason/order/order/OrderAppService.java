@@ -1,22 +1,25 @@
 package com.eason.order.order;
 
-import com.cartisan.constants.CodeMessage;
 import com.cartisan.dtos.PageResult;
-import com.cartisan.exceptions.CartisanException;
+import com.cartisan.utils.SnowflakeIdWorker;
+import com.eason.order.order.domain.Order;
+import com.eason.order.order.request.ChangeConsigneeCommand;
+import com.eason.order.order.request.OrderQuery;
+import com.eason.order.order.request.PlaceCommand;
+import com.eason.order.order.response.OrderConverter;
+import com.eason.order.order.response.OrderDetailConverter;
+import com.eason.order.order.response.OrderDetailDto;
+import com.eason.order.order.response.OrderDto;
 import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.cartisan.utils.SnowflakeIdWorker;
-
 import javax.transaction.Transactional;
-import java.util.List;
 
 import static com.cartisan.repositories.ConditionSpecifications.querySpecification;
 import static com.cartisan.utils.AssertionUtil.requirePresent;
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class OrderAppService {
@@ -24,6 +27,7 @@ public class OrderAppService {
     private final SnowflakeIdWorker idWorker;
 
     private final OrderConverter converter = OrderConverter.CONVERTER;
+    private final OrderDetailConverter detailConverter = OrderDetailConverter.CONVERTER;
 
     public OrderAppService(OrderRepository repository, SnowflakeIdWorker idWorker) {
         this.repository = repository;
@@ -38,43 +42,49 @@ public class OrderAppService {
                 converter.convert(searchResult.getContent()));
     }
 
-    public OrderDto getOrder(Long id) {
-        return converter.convert(requirePresent(repository.findById(id)));
+    public OrderDetailDto getOrder(Long id) {
+        return detailConverter.convert(requirePresent(repository.findById(id)));
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public OrderDto addOrder(OrderParam orderParam) {
+    public OrderDto place(PlaceCommand placeCommand) {
         final Order order = new Order(idWorker.nextId(),
-        orderParam.getUserId(),
-        orderParam.getPayAmount(),
-        orderParam.getConsigneeAddress(),
-        orderParam.getConsigneePhone(),
-        orderParam.getConsigneeName(),
-        orderParam.getTradeNumber(),
-        orderParam.getOrderStatus(),
-        orderParam.getPayStatus());
+                placeCommand.getUserId(),
+                placeCommand.getPayAmount(),
+                placeCommand.getConsigneeAddress(),
+                placeCommand.getConsigneePhone(),
+                placeCommand.getConsigneeName());
+
+        placeCommand.getItems().forEach(orderItemParam ->
+                order.addItem(orderItemParam.getProductId(), orderItemParam.getMerchantId()));
 
         return converter.convert(repository.save(order));
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public OrderDto editOrder(Long id, OrderParam orderParam) {
+    public OrderDto changeConsignee(ChangeConsigneeCommand command) {
+        final Order order = requirePresent(repository.findById(command.getOrderId()));
+
+        order.changeConsignee(command.getConsigneeAddress(), command.getConsigneePhone(), command.getConsigneeName());
+
+        return converter.convert(repository.save(order));
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    public void cancel(long id) {
         final Order order = requirePresent(repository.findById(id));
+        order.cancel();
 
-        order.describe(orderParam.getUserId(),
-        orderParam.getPayAmount(),
-        orderParam.getConsigneeAddress(),
-        orderParam.getConsigneePhone(),
-        orderParam.getConsigneeName(),
-        orderParam.getTradeNumber(),
-        orderParam.getOrderStatus(),
-        orderParam.getPayStatus());
-
-        return converter.convert(repository.save(order));
+        repository.save(order);
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public void removeOrder(long id) {
-        repository.deleteById(id);
+    public void pay(long id) {
+        final Order order = requirePresent(repository.findById(id));
+        order.pay();
+
+        repository.save(order);
     }
+
+
 }

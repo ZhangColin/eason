@@ -28,11 +28,4 @@ public class MerchantParam {
 
     @ApiModelProperty(value = "经营范围")
     private String scope;
-
-    @ApiModelProperty(value = "状态(0：禁用  2：启用 ）")
-    private Integer status;
-
-    @ApiModelProperty(value = "审核状态，1 提交成功 2 审核通过 3 审核不通过")
-    private Integer auditStatus;
-
 }

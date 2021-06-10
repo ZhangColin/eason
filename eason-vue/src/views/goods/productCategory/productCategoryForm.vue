@@ -1,41 +1,41 @@
 <template>
   <div class="app-container">
     <el-card shadow="never">
-      <el-form ref="productCategoryForm" :model="productCategory" :rules="rules" label-width="150px">
+      <el-form ref="productCategoryForm" :model="category" :rules="rules" label-width="150px">
         <el-form-item label="分类名称：">
-          <el-input v-model="productCategory.name" />
+          <el-input v-model="category.name" />
         </el-form-item>
         <el-form-item label="上级分类：">
-          <el-select v-model="productCategory.parentId" placeholder="请选择分类">
+          <el-select v-model="category.parentId" placeholder="请选择分类">
             <el-option v-for="item in productCategoryOptions" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
         <el-form-item label="数量单位：">
-          <el-input v-model="productCategory.productUnit" />
+          <el-input v-model="category.productUnit" />
         </el-form-item>
         <el-form-item label="显示在导航栏：">
-          <el-radio-group v-model="productCategory.showNavigation">
+          <el-radio-group v-model="category.showNavigation">
             <el-radio :label="true">是</el-radio>
             <el-radio :label="false">否</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="显示：">
-          <el-radio-group v-model="productCategory.isShow">
+          <el-radio-group v-model="category.isShow">
             <el-radio :label="true">是</el-radio>
             <el-radio :label="false">否</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="图标：">
-          <el-input v-model="productCategory.icon" />
+          <el-input v-model="category.icon" />
         </el-form-item>
         <el-form-item label="关键字：">
-          <el-input v-model="productCategory.keywords" />
+          <el-input v-model="category.keywords" />
         </el-form-item>
         <el-form-item label="描述：">
-          <el-input v-model="productCategory.description" />
+          <el-input v-model="category.description" />
         </el-form-item>
         <el-form-item label="排序：">
-          <el-input v-model.number="productCategory.sort" />
+          <el-input v-model.number="category.sort" />
         </el-form-item>
         <el-form-item
           v-for="(productAttribute, index) in productAttributes"
@@ -99,7 +99,7 @@ export default {
   },
   data() {
     return {
-      productCategory: Object.assign({}, defaultProductCategory),
+      category: Object.assign({}, defaultProductCategory),
       rules: {
         name: [
           { required: true, message: '请输入分类名称', trigger: 'blur' },
@@ -123,7 +123,7 @@ export default {
     init() {
       if (this.isEdit) {
         getProductCategory(this.$route.query.id).then(response => {
-          this.productCategory = response.data
+          this.category = response.data
         })
         getProductCategoryAttributes(this.$route.query.id).then(response => {
           this.productAttributes = []
@@ -141,7 +141,7 @@ export default {
           }
         })
       } else {
-        this.productCategory = Object.assign({}, defaultProductCategory)
+        this.category = Object.assign({}, defaultProductCategory)
         this.productAttributes.push({
           value: null,
           key: Date.now()
@@ -195,9 +195,9 @@ export default {
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            this.productCategory.attributeIds = this.getSelectedAttributeIds()
+            this.category.attributeIds = this.getSelectedAttributeIds()
             if (this.isEdit) {
-              editProductCategory(this.$route.query.id, this.productCategory).then(response => {
+              editProductCategory(this.$route.query.id, this.category).then(response => {
                 this.$message({
                   message: '修改成功',
                   type: 'success',
@@ -206,7 +206,7 @@ export default {
                 this.$router.back()
               })
             } else {
-              addProductCategory(this.productCategory).then(response => {
+              addProductCategory(this.category).then(response => {
                 this.init()
                 this.$message({
                   message: '提交成功',

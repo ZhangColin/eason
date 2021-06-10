@@ -4,18 +4,11 @@ import com.cartisan.domains.AbstractEntity;
 import com.cartisan.domains.AggregateRoot;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import java.lang.Long;
-import java.lang.String;
-import java.lang.Integer;
-
-import static java.util.stream.Collectors.toList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "mch_merchants")
@@ -49,37 +42,39 @@ public class Merchant extends AbstractEntity implements AggregateRoot {
 
     private Merchant() {}
 
-    public Merchant(Long id,
-        String name,
-        String shopName,
-        String account,
-        String password,
-        String scope,
-        Integer status,
-        Integer auditStatus) {
+    public Merchant(Long id, String name, String shopName, String account, String password, String scope) {
         this.id = id;
         this.name = name;
         this.shopName = shopName;
         this.account = account;
         this.password = password;
         this.scope = scope;
-        this.status = status;
-        this.auditStatus = auditStatus;
+        this.status = 1;
+        this.auditStatus = 1;
     }
 
-    public void describe(String name,
-        String shopName,
-        String account,
-        String password,
-        String scope,
-        Integer status,
-        Integer auditStatus) {
+    public void describe(String name, String shopName, String account, String password, String scope) {
         this.name = name;
         this.shopName = shopName;
         this.account = account;
         this.password = password;
         this.scope = scope;
-        this.status = status;
-        this.auditStatus = auditStatus;
     }
+
+    public void enable() {
+        this.status = 1;
+    }
+
+    public void disable() {
+        this.status = 0;
+    }
+
+    public void approve() {
+        this.auditStatus = 2;
+    }
+
+    public void reject() {
+        this.auditStatus = 3;
+    }
+
 }

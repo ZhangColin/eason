@@ -1,4 +1,4 @@
-package com.eason.order.orderItem;
+package com.eason.order.order.domain;
 
 import com.cartisan.domains.AbstractEntity;
 import com.cartisan.domains.AggregateRoot;
@@ -20,13 +20,11 @@ import static java.util.stream.Collectors.toList;
 @Table(name = "ord_order_items")
 @Getter
 @EqualsAndHashCode(callSuper = true)
-public class OrderItem extends AbstractEntity implements AggregateRoot {
+public class OrderItem extends AbstractEntity {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "order_id")
-    private Long orderId;
 
     @Column(name = "product_id")
     private Long productId;
@@ -34,30 +32,10 @@ public class OrderItem extends AbstractEntity implements AggregateRoot {
     @Column(name = "merchant_id")
     private Long merchantId;
 
-    @Column(name = "trade_number")
-    private String tradeNumber;
-
     private OrderItem() {}
 
-    public OrderItem(Long id,
-        Long orderId,
-        Long productId,
-        Long merchantId,
-        String tradeNumber) {
-        this.id = id;
-        this.orderId = orderId;
+    public OrderItem(Long productId, Long merchantId) {
         this.productId = productId;
         this.merchantId = merchantId;
-        this.tradeNumber = tradeNumber;
-    }
-
-    public void describe(Long orderId,
-        Long productId,
-        Long merchantId,
-        String tradeNumber) {
-        this.orderId = orderId;
-        this.productId = productId;
-        this.merchantId = merchantId;
-        this.tradeNumber = tradeNumber;
     }
 }

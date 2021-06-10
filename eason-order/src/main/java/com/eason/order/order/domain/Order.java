@@ -1,4 +1,4 @@
-package com.eason.order.order;
+package com.eason.order.order.domain;
 
 import com.cartisan.domains.AbstractEntity;
 import com.cartisan.domains.AggregateRoot;
@@ -50,43 +50,42 @@ public class Order extends AbstractEntity implements AggregateRoot {
     @Column(name = "pay_status")
     private Integer payStatus;
 
+    private List<OrderItem> items = new ArrayList<>();
+
     private Order() {}
 
-    public Order(Long id,
-        Long userId,
-        Integer payAmount,
-        String consigneeAddress,
-        String consigneePhone,
-        String consigneeName,
-        String tradeNumber,
-        Integer orderStatus,
-        Integer payStatus) {
+    public Order(Long id, Long userId, Integer payAmount,
+        String consigneeAddress, String consigneePhone, String consigneeName) {
         this.id = id;
         this.userId = userId;
         this.payAmount = payAmount;
         this.consigneeAddress = consigneeAddress;
         this.consigneePhone = consigneePhone;
         this.consigneeName = consigneeName;
-        this.tradeNumber = tradeNumber;
-        this.orderStatus = orderStatus;
-        this.payStatus = payStatus;
+
+        this.tradeNumber = "T"+id;
+        this.orderStatus = 1;
+        this.payStatus = 1;
     }
 
-    public void describe(Long userId,
-        Integer payAmount,
-        String consigneeAddress,
-        String consigneePhone,
-        String consigneeName,
-        String tradeNumber,
-        Integer orderStatus,
-        Integer payStatus) {
-        this.userId = userId;
-        this.payAmount = payAmount;
+    public void addItem(Long productId, Long merchantId) {
+        this.items.add(new OrderItem(productId, merchantId));
+    }
+
+    public void changeConsignee(String consigneeAddress, String consigneePhone, String consigneeName) {
         this.consigneeAddress = consigneeAddress;
         this.consigneePhone = consigneePhone;
         this.consigneeName = consigneeName;
-        this.tradeNumber = tradeNumber;
-        this.orderStatus = orderStatus;
-        this.payStatus = payStatus;
+    }
+
+    public void cancel() {
+        this.orderStatus=2;
+        if (this.payStatus == 2) {
+            this.payStatus = 3;
+        }
+    }
+
+    public void pay() {
+        this.payStatus=2;
     }
 }

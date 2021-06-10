@@ -1,17 +1,20 @@
-package com.eason.order.order;
+package com.eason.order.order.request;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.lang.Long;
 import java.lang.String;
 import java.lang.Integer;
+import java.util.List;
 
 @Data
-public class OrderDto {
-    @ApiModelProperty(value = "订单Id")
-    private Long id;
-
+public class PlaceCommand {
     @ApiModelProperty(value = "用户Id")
     private Long userId;
 
@@ -27,13 +30,5 @@ public class OrderDto {
     @ApiModelProperty(value = "收件人姓名")
     private String consigneeName;
 
-    @ApiModelProperty(value = "交易流水号")
-    private String tradeNumber;
-
-    @ApiModelProperty(value = "订单状态，0 正常 1 取消")
-    private Integer orderStatus;
-
-    @ApiModelProperty(value = "支付状态，1未支付 2已支付 3已退款")
-    private Integer payStatus;
-
+    private List<OrderItemParam> items;
 }

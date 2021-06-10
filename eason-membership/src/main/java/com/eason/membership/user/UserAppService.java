@@ -42,6 +42,10 @@ public class UserAppService {
         return converter.convert(requirePresent(repository.findById(id)));
     }
 
+    public UserDto findByUserName(String name) {
+        return repository.findByName(name).map(converter::convert).orElse(new UserDto());
+    }
+
     @Transactional(rollbackOn = Exception.class)
     public UserDto addUser(UserParam userParam) {
         final User user = new User(idWorker.nextId(),

@@ -1,22 +1,17 @@
 package com.eason.merchant.merchant;
 
-import com.cartisan.constants.CodeMessage;
 import com.cartisan.dtos.PageResult;
-import com.cartisan.exceptions.CartisanException;
+import com.cartisan.utils.SnowflakeIdWorker;
 import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.cartisan.utils.SnowflakeIdWorker;
-
 import javax.transaction.Transactional;
-import java.util.List;
 
 import static com.cartisan.repositories.ConditionSpecifications.querySpecification;
 import static com.cartisan.utils.AssertionUtil.requirePresent;
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class MerchantAppService {
@@ -49,9 +44,7 @@ public class MerchantAppService {
         merchantParam.getShopName(),
         merchantParam.getAccount(),
         merchantParam.getPassword(),
-        merchantParam.getScope(),
-        merchantParam.getStatus(),
-        merchantParam.getAuditStatus());
+        merchantParam.getScope());
 
         return converter.convert(repository.save(merchant));
     }
@@ -64,9 +57,7 @@ public class MerchantAppService {
         merchantParam.getShopName(),
         merchantParam.getAccount(),
         merchantParam.getPassword(),
-        merchantParam.getScope(),
-        merchantParam.getStatus(),
-        merchantParam.getAuditStatus());
+        merchantParam.getScope());
 
         return converter.convert(repository.save(merchant));
     }
@@ -74,5 +65,37 @@ public class MerchantAppService {
     @Transactional(rollbackOn = Exception.class)
     public void removeMerchant(long id) {
         repository.deleteById(id);
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    public MerchantDto approve(Long id) {
+        final Merchant merchant = requirePresent(repository.findById(id));
+        merchant.approve();
+
+        return converter.convert(repository.save(merchant));
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    public MerchantDto reject(Long id) {
+        final Merchant merchant = requirePresent(repository.findById(id));
+        merchant.reject();
+
+        return converter.convert(repository.save(merchant));
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    public MerchantDto enable(Long id) {
+        final Merchant merchant = requirePresent(repository.findById(id));
+        merchant.enable();
+
+        return converter.convert(repository.save(merchant));
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    public MerchantDto disable(Long id) {
+        final Merchant merchant = requirePresent(repository.findById(id));
+        merchant.disable();
+
+        return converter.convert(repository.save(merchant));
     }
 }

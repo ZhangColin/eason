@@ -1,4 +1,4 @@
-package com.eason.goods.productCategory;
+package com.eason.goods.category;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -8,10 +8,7 @@ import java.lang.String;
 import java.lang.Integer;
 
 @Data
-public class ProductCategoryDto {
-    @ApiModelProperty(value = "分类Id")
-    private Long id;
-
+public class CategoryParam {
     @ApiModelProperty(value = "上级分类")
     private Long parentId;
 

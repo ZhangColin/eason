@@ -7,7 +7,7 @@ CREATE TABLE `ord_orders` (
   `consignee_phone` varchar(16) NOT NULL DEFAULT '' COMMENT '收件人电话',
   `consignee_name` varchar(32) NOT NULL DEFAULT '' COMMENT '收件人姓名',
   `trade_number` varchar(64) NOT NULL DEFAULT '' COMMENT '交易流水号',
-  `order_status` tinyint NOT NULL DEFAULT 1 COMMENT '订单状态，0 正常 1 取消',
+  `order_status` tinyint NOT NULL DEFAULT 1 COMMENT '订单状态，1 正常 2 取消',
   `pay_status` tinyint NOT NULL DEFAULT 1 COMMENT '支付状态，1未支付 2已支付 3已退款',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -22,11 +22,10 @@ CREATE TABLE `ord_orders` (
 
 -- 订单项表
 CREATE TABLE `ord_order_items` (
-  `id` bigint NOT NULL COMMENT '主键',
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
   `order_id` bigint NOT NULL COMMENT '订单Id',
   `product_id` bigint NOT NULL COMMENT '产品Id',
   `merchant_id` bigint NOT NULL COMMENT '供应商Id',
-  `trade_number` varchar(64) NOT NULL DEFAULT '' COMMENT '交易流水号',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE

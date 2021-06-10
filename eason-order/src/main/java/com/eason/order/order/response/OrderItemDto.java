@@ -1,4 +1,4 @@
-package com.eason.order.orderItem;
+package com.eason.order.order.response;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

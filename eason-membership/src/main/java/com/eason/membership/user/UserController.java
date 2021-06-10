@@ -44,6 +44,13 @@ public class UserController {
     }
 
     @ApiOperation(value = "添加用户")
+    @PostMapping("/register")
+    public ResponseEntity<UserDto> register(
+            @ApiParam(value = "用户信息", required = true) @Validated @RequestBody UserParam userParam) {
+        return success(service.addUser(userParam));
+    }
+
+    @ApiOperation(value = "添加用户")
     @PostMapping
     public ResponseEntity<UserDto> addUser(
             @ApiParam(value = "用户信息", required = true) @Validated @RequestBody UserParam userParam) {

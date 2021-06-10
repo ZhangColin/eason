@@ -1,6 +1,7 @@
-package com.eason.order.order;
+package com.eason.order.order.response;
 
 import com.cartisan.dtos.Converter;
+import com.eason.order.order.domain.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

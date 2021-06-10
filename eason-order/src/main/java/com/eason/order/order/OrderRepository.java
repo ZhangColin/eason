@@ -1,8 +1,7 @@
 package com.eason.order.order;
 
 import com.cartisan.repositories.BaseRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.eason.order.order.domain.Order;
 
 public interface OrderRepository extends BaseRepository<Order, Long> {
 

@@ -1,27 +1,21 @@
-package com.eason.goods.productCategory;
+package com.eason.goods.category;
 
 import com.cartisan.domains.AbstractEntity;
 import com.cartisan.domains.AggregateRoot;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import java.lang.Long;
 import java.lang.String;
 import java.lang.Integer;
 
-import static java.util.stream.Collectors.toList;
-
 @Entity
 @Table(name = "gds_product_categories")
 @Getter
 @EqualsAndHashCode(callSuper = true)
-public class ProductCategory extends AbstractEntity implements AggregateRoot {
+public class Category extends AbstractEntity implements AggregateRoot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -42,14 +36,14 @@ public class ProductCategory extends AbstractEntity implements AggregateRoot {
     @Column(name = "sort")
     private Integer sort;
 
-    private ProductCategory() {}
+    private Category() {}
 
-    public ProductCategory(Long parentId,
-        String name,
-        String description,
-        Integer level,
-        Integer sort) {
-        
+    public Category(Long parentId,
+                    String name,
+                    String description,
+                    Integer level,
+                    Integer sort) {
+
         this.parentId = parentId;
         this.name = name;
         this.description = description;
