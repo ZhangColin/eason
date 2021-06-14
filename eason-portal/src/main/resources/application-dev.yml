@@ -1,0 +1,10 @@
+
+
+logging:
+  file:
+    path: /Users/colin/logs/eason/portal
+    name: eason-portal
+  level:
+    com.eason.merchant: debug
+
+

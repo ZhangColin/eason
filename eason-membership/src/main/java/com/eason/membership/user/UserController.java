@@ -43,6 +43,12 @@ public class UserController {
         return success(service.getUser(id));
     }
 
+    @ApiOperation(value = "获取用户")
+    @GetMapping("/findByUserName")
+    public ResponseEntity<UserDto> findByUserName(@ApiParam(value = "用户名", required = true) @RequestParam String userName){
+        return success(service.findByUserName(userName));
+    }
+
     @ApiOperation(value = "添加用户")
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(

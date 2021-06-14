@@ -50,6 +50,9 @@ public class Order extends AbstractEntity implements AggregateRoot {
     @Column(name = "pay_status")
     private Integer payStatus;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    @JoinColumn(name = "order_id")
     private List<OrderItem> items = new ArrayList<>();
 
     private Order() {}
