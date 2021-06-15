@@ -17,7 +17,7 @@ import static com.cartisan.responses.ResponseUtil.success;
 
 @Api(tags = "商品：产品分类")
 @RestController
-@RequestMapping("/productCategories")
+@RequestMapping("/categories")
 @Validated
 @Slf4j
 public class CategoryController {

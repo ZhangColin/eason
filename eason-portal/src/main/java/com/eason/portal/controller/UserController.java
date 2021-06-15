@@ -37,12 +37,12 @@ public class UserController {
 
 
 
-    @GetMapping(value = "/register.html")
+    @GetMapping(value = "/login.html")
     public String login() {
         return "user/login";
     }
 
-    @PostMapping(value = "register")
+    @PostMapping(value = "login")
     public String login(String account, String password, HttpServletRequest request){
         final UserDto user = userService.findByUserName(account);
         if (user == null) {

@@ -43,7 +43,7 @@ public class UserAppService {
     }
 
     public UserDto findByUserName(String name) {
-        return repository.findByName(name).map(converter::convert).orElse(new UserDto());
+        return repository.findByName(name).map(converter::convert).orElse(null);
     }
 
     @Transactional(rollbackOn = Exception.class)
