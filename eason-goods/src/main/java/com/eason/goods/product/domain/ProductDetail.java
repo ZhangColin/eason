@@ -1,4 +1,4 @@
-package com.eason.goods.productDetail;
+package com.eason.goods.product.domain;
 
 import com.cartisan.domains.AbstractEntity;
 import com.cartisan.domains.AggregateRoot;
@@ -45,13 +45,7 @@ public class ProductDetail extends AbstractEntity implements AggregateRoot {
 
     private ProductDetail() {}
 
-    public ProductDetail(Long id,
-        String place,
-        String description,
-        String brand,
-        String weight,
-        String specification,
-        String pictureUrl) {
+    public ProductDetail(Long id,String place, String description, String brand, String weight, String specification, String pictureUrl) {
         this.id = id;
         this.place = place;
         this.description = description;
@@ -61,12 +55,7 @@ public class ProductDetail extends AbstractEntity implements AggregateRoot {
         this.pictureUrl = pictureUrl;
     }
 
-    public void describe(String place,
-        String description,
-        String brand,
-        String weight,
-        String specification,
-        String pictureUrl) {
+    public void describe(String place, String description, String brand, String weight, String specification, String pictureUrl) {
         this.place = place;
         this.description = description;
         this.brand = brand;

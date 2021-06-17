@@ -1,4 +1,4 @@
-package com.eason.goods.product;
+package com.eason.goods.product.domain;
 
 import com.cartisan.domains.AbstractEntity;
 import com.cartisan.domains.AggregateRoot;
@@ -57,51 +57,31 @@ public class Product extends AbstractEntity implements AggregateRoot {
     @Column(name = "status")
     private Integer status;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    @JoinColumn(name = "id")
+    private ProductDetail productDetail;
+
     private Product() {}
 
-    public Product(Long id,
-        Long categoryId,
-        Long merchantId,
-        String title,
-        String pictureUrl,
-        Integer price,
-        Integer stockNumber,
-        Integer sellNumber,
-        Integer auditStatus,
-        Date audited,
-        Integer status) {
+    public Product(Long id, Long categoryId, Long merchantId, String title, String pictureUrl, Integer price) {
         this.id = id;
         this.categoryId = categoryId;
         this.merchantId = merchantId;
         this.title = title;
         this.pictureUrl = pictureUrl;
         this.price = price;
-        this.stockNumber = stockNumber;
-        this.sellNumber = sellNumber;
-        this.auditStatus = auditStatus;
-        this.audited = audited;
-        this.status = status;
+        this.stockNumber = 0;
+        this.sellNumber = 0;
+        this.auditStatus = 0;
+        this.status = 0;
     }
 
-    public void describe(Long categoryId,
-        Long merchantId,
-        String title,
-        String pictureUrl,
-        Integer price,
-        Integer stockNumber,
-        Integer sellNumber,
-        Integer auditStatus,
-        Date audited,
-        Integer status) {
+    public void describe(Long categoryId, Long merchantId, String title, String pictureUrl, Integer price) {
         this.categoryId = categoryId;
         this.merchantId = merchantId;
         this.title = title;
         this.pictureUrl = pictureUrl;
         this.price = price;
-        this.stockNumber = stockNumber;
-        this.sellNumber = sellNumber;
-        this.auditStatus = auditStatus;
-        this.audited = audited;
-        this.status = status;
     }
 }

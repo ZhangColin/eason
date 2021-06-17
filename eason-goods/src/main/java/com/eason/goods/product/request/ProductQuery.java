@@ -1,4 +1,4 @@
-package com.eason.goods.product;
+package com.eason.goods.product.request;
 
 import lombok.Data;
 

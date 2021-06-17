@@ -1,4 +1,4 @@
-package com.eason.goods.product;
+package com.eason.goods.product.request;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -29,20 +29,5 @@ public class ProductParam {
 
     @ApiModelProperty(value = "价格")
     private Integer price;
-
-    @ApiModelProperty(value = "库存")
-    private Integer stockNumber;
-
-    @ApiModelProperty(value = "销量")
-    private Integer sellNumber;
-
-    @ApiModelProperty(value = "审核状态，0 未审核 1 审核通过 2 审核不通过")
-    private Integer auditStatus;
-
-    @ApiModelProperty(value = "审核时间")
-    private Date audited;
-
-    @ApiModelProperty(value = "产品状态，0 下架 1 h 架")
-    private Integer status;
 
 }

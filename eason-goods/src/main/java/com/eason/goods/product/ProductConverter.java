@@ -1,6 +1,8 @@
 package com.eason.goods.product;
 
 import com.cartisan.dtos.Converter;
+import com.eason.goods.product.domain.Product;
+import com.eason.goods.product.response.ProductDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

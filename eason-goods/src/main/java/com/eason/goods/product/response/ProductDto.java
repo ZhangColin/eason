@@ -1,4 +1,4 @@
-package com.eason.goods.product;
+package com.eason.goods.product.response;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -40,7 +40,7 @@ public class ProductDto {
     @ApiModelProperty(value = "审核时间")
     private Date audited;
 
-    @ApiModelProperty(value = "产品状态，0 下架 1 h 架")
+    @ApiModelProperty(value = "产品状态，0 下架 1 下架")
     private Integer status;
 
 }

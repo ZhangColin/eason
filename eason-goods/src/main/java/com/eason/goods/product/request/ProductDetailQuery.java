@@ -1,4 +1,4 @@
-package com.eason.goods.productDetail;
+package com.eason.goods.product.request;
 
 import com.cartisan.repositories.Condition;
 import io.swagger.annotations.ApiModelProperty;

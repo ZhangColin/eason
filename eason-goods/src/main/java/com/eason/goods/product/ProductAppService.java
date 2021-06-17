@@ -1,8 +1,10 @@
 package com.eason.goods.product;
 
-import com.cartisan.constants.CodeMessage;
 import com.cartisan.dtos.PageResult;
-import com.cartisan.exceptions.CartisanException;
+import com.eason.goods.product.domain.Product;
+import com.eason.goods.product.request.ProductParam;
+import com.eason.goods.product.request.ProductQuery;
+import com.eason.goods.product.response.ProductDto;
 import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,11 +14,9 @@ import org.springframework.stereotype.Service;
 import com.cartisan.utils.SnowflakeIdWorker;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 import static com.cartisan.repositories.ConditionSpecifications.querySpecification;
 import static com.cartisan.utils.AssertionUtil.requirePresent;
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class ProductAppService {

@@ -1,18 +1,16 @@
-package com.eason.goods.productDetail;
+package com.eason.goods.product.response;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import java.lang.Long;
 import java.lang.String;
 
 @Data
-public class ProductDetailParam {
+public class ProductDetailDto {
+    @ApiModelProperty(value = "产品Id")
+    private Long id;
+
     @ApiModelProperty(value = "产地")
     private String place;
 
