@@ -22,7 +22,7 @@ public class RateLimitFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return SERVLET_DETECTION_FILTER_ORDER-1;
+        return SERVLET_DETECTION_FILTER_ORDER - 1;
     }
 
     @Override

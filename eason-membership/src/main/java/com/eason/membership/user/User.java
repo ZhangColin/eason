@@ -4,18 +4,11 @@ import com.cartisan.domains.AbstractEntity;
 import com.cartisan.domains.AggregateRoot;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import java.lang.Long;
-import java.lang.String;
-import java.lang.Integer;
-
-import static java.util.stream.Collectors.toList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "ms_users")
@@ -56,19 +49,20 @@ public class User extends AbstractEntity implements AggregateRoot {
     @Column(name = "sex")
     private String sex;
 
-    private User() {}
+    private User() {
+    }
 
     public User(Long id,
-        String name,
-        Integer age,
-        String account,
-        String passwordEncrypt,
-        String address,
-        String telphone,
-        String qq,
-        String email,
-        String weixin,
-        String sex) {
+                String name,
+                Integer age,
+                String account,
+                String passwordEncrypt,
+                String address,
+                String telphone,
+                String qq,
+                String email,
+                String weixin,
+                String sex) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -83,15 +77,15 @@ public class User extends AbstractEntity implements AggregateRoot {
     }
 
     public void describe(String name,
-        Integer age,
-        String account,
-        String passwordEncrypt,
-        String address,
-        String telphone,
-        String qq,
-        String email,
-        String weixin,
-        String sex) {
+                         Integer age,
+                         String account,
+                         String passwordEncrypt,
+                         String address,
+                         String telphone,
+                         String qq,
+                         String email,
+                         String weixin,
+                         String sex) {
         this.name = name;
         this.age = age;
         this.account = account;

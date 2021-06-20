@@ -35,7 +35,7 @@ public class MerchantController {
 
     @ApiOperation(value = "获取商户")
     @GetMapping("/{id}")
-    public ResponseEntity<MerchantDto> getMerchant(@ApiParam(value = "商户Id", required = true) @PathVariable Long id){
+    public ResponseEntity<MerchantDto> getMerchant(@ApiParam(value = "商户Id", required = true) @PathVariable Long id) {
         return success(service.getMerchant(id));
     }
 

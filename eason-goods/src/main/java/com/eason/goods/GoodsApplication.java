@@ -10,6 +10,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @SpringBootApplication(scanBasePackages = {"com.cartisan", "com.eason.goods"})
 @EnableEurekaClient
 public class GoodsApplication {
-    public static void main(String[] args) {SpringApplication.run(GoodsApplication.class, args);
+    public static void main(String[] args) {
+        SpringApplication.run(GoodsApplication.class, args);
     }
 }

@@ -22,13 +22,12 @@ public class ProductController {
     private final ProductService productService;
 
 
-
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping(value = "/list")
-    public String searchProduct(Model model, @RequestParam String keyword, @RequestParam Long categoryId){
+    public String searchProduct(Model model, @RequestParam String keyword, @RequestParam Long categoryId) {
         final List<ProductCategoryDto> productCategories = productService.getAllProductCategories();
         model.addAttribute("productCategories", productCategories);
 

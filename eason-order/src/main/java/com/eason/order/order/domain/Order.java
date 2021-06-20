@@ -11,12 +11,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.lang.Long;
-import java.lang.String;
-import java.lang.Integer;
-
-import static java.util.stream.Collectors.toList;
-
 @Entity
 @Table(name = "ord_orders")
 @Getter
@@ -55,10 +49,11 @@ public class Order extends AbstractEntity implements AggregateRoot {
     @JoinColumn(name = "order_id")
     private List<OrderItem> items = new ArrayList<>();
 
-    private Order() {}
+    private Order() {
+    }
 
     public Order(Long id, Long userId, Integer payAmount,
-        String consigneeAddress, String consigneePhone, String consigneeName) {
+                 String consigneeAddress, String consigneePhone, String consigneeName) {
         this.id = id;
         this.userId = userId;
         this.payAmount = payAmount;
@@ -66,7 +61,7 @@ public class Order extends AbstractEntity implements AggregateRoot {
         this.consigneePhone = consigneePhone;
         this.consigneeName = consigneeName;
 
-        this.tradeNumber = "T"+id;
+        this.tradeNumber = "T" + id;
         this.orderStatus = 1;
         this.payStatus = 1;
     }
@@ -82,13 +77,13 @@ public class Order extends AbstractEntity implements AggregateRoot {
     }
 
     public void cancel() {
-        this.orderStatus=2;
+        this.orderStatus = 2;
         if (this.payStatus == 2) {
             this.payStatus = 3;
         }
     }
 
     public void pay() {
-        this.payStatus=2;
+        this.payStatus = 2;
     }
 }

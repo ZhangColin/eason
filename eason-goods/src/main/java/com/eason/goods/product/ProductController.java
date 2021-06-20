@@ -1,9 +1,7 @@
 package com.eason.goods.product;
 
 import com.cartisan.dtos.PageResult;
-import com.eason.goods.product.request.ProductDetailParam;
 import com.eason.goods.product.request.ProductParam;
-import com.eason.goods.product.request.ProductQuery;
 import com.eason.goods.product.response.ProductDetailDto;
 import com.eason.goods.product.response.ProductDto;
 import io.swagger.annotations.Api;
@@ -33,14 +31,14 @@ public class ProductController {
     @ApiOperation(value = "搜索产品")
     @GetMapping("/search")
     public ResponseEntity<PageResult<ProductDto>> searchProducts(
-            @ApiParam(value = "查询参数") ProductQuery productQuery,
+            @ApiParam(value = "查询参数") @RequestParam String keyword,
             @PageableDefault Pageable pageable) {
-        return success(service.searchProducts(productQuery, pageable));
+        return success(service.searchProducts(keyword, pageable));
     }
 
     @ApiOperation(value = "获取产品")
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDetailDto> getProduct(@ApiParam(value = "产品Id", required = true) @PathVariable Long id){
+    public ResponseEntity<ProductDetailDto> getProduct(@ApiParam(value = "产品Id", required = true) @PathVariable Long id) {
         return success(service.getProduct(id));
     }
 
@@ -63,42 +61,48 @@ public class ProductController {
     @PutMapping("/{id}/approve")
     public ResponseEntity<?> approve(
             @ApiParam(value = "产品Id", required = true) @PathVariable Long id) {
-        return success(service.approve(id));
+        service.approve(id);
+        return success();
     }
 
     @ApiOperation(value = "审核未通过")
     @PutMapping("/{id}/reject")
     public ResponseEntity<?> reject(
             @ApiParam(value = "产品Id", required = true) @PathVariable Long id) {
-        return success(service.reject(id));
+        service.reject(id);
+        return success();
     }
 
     @ApiOperation(value = "上架")
-    @PutMapping("/{id}/soldOn")
-    public ResponseEntity<?> approve(
+    @PutMapping("/{id}/putaway")
+    public ResponseEntity<?> putaway(
             @ApiParam(value = "产品Id", required = true) @PathVariable Long id) {
-        return success(service.approve(id));
+        service.putaway(id);
+        return success();
     }
 
     @ApiOperation(value = "下架")
     @PutMapping("/{id}/soldOut")
-    public ResponseEntity<?> reject(
+    public ResponseEntity<?> soldOut(
             @ApiParam(value = "产品Id", required = true) @PathVariable Long id) {
-        return success(service.reject(id));
+        service.soldOut(id);
+        return success();
     }
 
     @ApiOperation(value = "添加库存")
     @PutMapping("/{id}/addStock")
     public ResponseEntity<?> reject(
-            @ApiParam(value = "产品Id", required = true) @PathVariable Long id, @RequestParam Integer stock) {
-        return success(service.addStock(id));
+            @ApiParam(value = "产品Id", required = true) @PathVariable Long id, @RequestParam Integer count) {
+        service.addStock(id, count);
+        return success();
     }
 
-    @ApiOperation(value = "添加库存")
-    @PutMapping("/{id}/editDetail")
-    public ResponseEntity<?> reject(
-            @ApiParam(value = "产品Id", required = true) @PathVariable Long id, @RequestBody ProductDetailParam param) {
-        return success(service.addStock(id));
+    @ApiOperation(value = "销售")
+    @PutMapping("/{id}/sell")
+    public ResponseEntity<?> sell(
+            @ApiParam(value = "产品Id", required = true) @PathVariable Long id, @RequestParam Integer count) {
+        service.sell(id, count);
+        return success();
     }
 
     @ApiOperation(value = "删除产品")

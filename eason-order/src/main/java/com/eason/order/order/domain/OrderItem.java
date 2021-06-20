@@ -1,20 +1,10 @@
 package com.eason.order.order.domain;
 
 import com.cartisan.domains.AbstractEntity;
-import com.cartisan.domains.AggregateRoot;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import java.lang.Long;
-import java.lang.String;
-
-import static java.util.stream.Collectors.toList;
 
 @Entity
 @Table(name = "ord_order_items")
@@ -32,7 +22,8 @@ public class OrderItem extends AbstractEntity {
     @Column(name = "merchant_id")
     private Long merchantId;
 
-    private OrderItem() {}
+    private OrderItem() {
+    }
 
     public OrderItem(Long productId, Long merchantId) {
         this.productId = productId;

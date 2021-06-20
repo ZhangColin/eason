@@ -1,22 +1,16 @@
 package com.eason.goods.product.domain;
 
+import com.cartisan.constants.CodeMessage;
 import com.cartisan.domains.AbstractEntity;
 import com.cartisan.domains.AggregateRoot;
+import com.cartisan.exceptions.CartisanException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import java.lang.Long;
-import java.util.Date;
-import java.lang.String;
-import java.lang.Integer;
-
-import static java.util.stream.Collectors.toList;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "gds_products")
@@ -52,17 +46,17 @@ public class Product extends AbstractEntity implements AggregateRoot {
     private Integer auditStatus;
 
     @Column(name = "audited")
-    private Date audited;
+    private LocalDateTime audited;
 
     @Column(name = "status")
     private Integer status;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @Fetch(FetchMode.SUBSELECT)
     @JoinColumn(name = "id")
     private ProductDetail productDetail;
 
-    private Product() {}
+    private Product() {
+    }
 
     public Product(Long id, Long categoryId, Long merchantId, String title, String pictureUrl, Integer price) {
         this.id = id;
@@ -75,6 +69,8 @@ public class Product extends AbstractEntity implements AggregateRoot {
         this.sellNumber = 0;
         this.auditStatus = 0;
         this.status = 0;
+
+        this.productDetail = new ProductDetail(id);
     }
 
     public void describe(Long categoryId, Long merchantId, String title, String pictureUrl, Integer price) {
@@ -83,5 +79,38 @@ public class Product extends AbstractEntity implements AggregateRoot {
         this.title = title;
         this.pictureUrl = pictureUrl;
         this.price = price;
+    }
+
+    public void setDetail(String place, String description, String brand, String weight, String specification, String pictureUrl) {
+        this.productDetail.describe(place, description, brand, weight, specification, pictureUrl);
+    }
+
+    public void approve() {
+        this.audited = LocalDateTime.now();
+        this.auditStatus = 2;
+    }
+
+    public void reject() {
+        this.auditStatus = 3;
+    }
+
+    public void putaway() {
+        this.status = 1;
+    }
+
+    public void soldOut() {
+        this.status = 0;
+    }
+
+    public void addStock(Integer count) {
+        this.stockNumber += count;
+    }
+
+    public void sell(Integer count) {
+        if (count > this.stockNumber) {
+            throw new CartisanException(CodeMessage.FAIL.fillArgs("库存不足"));
+        }
+        this.stockNumber -= count;
+        this.sellNumber += count;
     }
 }

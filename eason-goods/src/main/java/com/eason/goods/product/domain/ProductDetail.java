@@ -4,17 +4,11 @@ import com.cartisan.domains.AbstractEntity;
 import com.cartisan.domains.AggregateRoot;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import java.lang.Long;
-import java.lang.String;
-
-import static java.util.stream.Collectors.toList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "gds_product_details")
@@ -43,16 +37,11 @@ public class ProductDetail extends AbstractEntity implements AggregateRoot {
     @Column(name = "picture_url")
     private String pictureUrl;
 
-    private ProductDetail() {}
+    private ProductDetail() {
+    }
 
-    public ProductDetail(Long id,String place, String description, String brand, String weight, String specification, String pictureUrl) {
+    public ProductDetail(Long id) {
         this.id = id;
-        this.place = place;
-        this.description = description;
-        this.brand = brand;
-        this.weight = weight;
-        this.specification = specification;
-        this.pictureUrl = pictureUrl;
     }
 
     public void describe(String place, String description, String brand, String weight, String specification, String pictureUrl) {

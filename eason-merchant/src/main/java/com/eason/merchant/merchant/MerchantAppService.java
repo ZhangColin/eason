@@ -40,11 +40,11 @@ public class MerchantAppService {
     @Transactional(rollbackOn = Exception.class)
     public MerchantDto addMerchant(MerchantParam merchantParam) {
         final Merchant merchant = new Merchant(idWorker.nextId(),
-        merchantParam.getName(),
-        merchantParam.getShopName(),
-        merchantParam.getAccount(),
-        merchantParam.getPassword(),
-        merchantParam.getScope());
+                merchantParam.getName(),
+                merchantParam.getShopName(),
+                merchantParam.getAccount(),
+                merchantParam.getPassword(),
+                merchantParam.getScope());
 
         return converter.convert(repository.save(merchant));
     }
@@ -54,10 +54,10 @@ public class MerchantAppService {
         final Merchant merchant = requirePresent(repository.findById(id));
 
         merchant.describe(merchantParam.getName(),
-        merchantParam.getShopName(),
-        merchantParam.getAccount(),
-        merchantParam.getPassword(),
-        merchantParam.getScope());
+                merchantParam.getShopName(),
+                merchantParam.getAccount(),
+                merchantParam.getPassword(),
+                merchantParam.getScope());
 
         return converter.convert(repository.save(merchant));
     }

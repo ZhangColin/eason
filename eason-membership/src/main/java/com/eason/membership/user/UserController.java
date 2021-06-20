@@ -1,8 +1,6 @@
 package com.eason.membership.user;
 
-import com.cartisan.constants.CodeMessage;
 import com.cartisan.dtos.PageResult;
-import com.cartisan.exceptions.CartisanException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -12,8 +10,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import static com.cartisan.responses.ResponseUtil.success;
 
@@ -39,13 +35,13 @@ public class UserController {
 
     @ApiOperation(value = "获取用户")
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUser(@ApiParam(value = "用户Id", required = true) @PathVariable Long id){
+    public ResponseEntity<UserDto> getUser(@ApiParam(value = "用户Id", required = true) @PathVariable Long id) {
         return success(service.getUser(id));
     }
 
     @ApiOperation(value = "获取用户")
     @GetMapping("/findByUserName")
-    public ResponseEntity<UserDto> findByUserName(@ApiParam(value = "用户名", required = true) @RequestParam String userName){
+    public ResponseEntity<UserDto> findByUserName(@ApiParam(value = "用户名", required = true) @RequestParam String userName) {
         return success(service.findByUserName(userName));
     }
 

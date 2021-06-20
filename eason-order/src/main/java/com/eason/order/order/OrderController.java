@@ -40,7 +40,7 @@ public class OrderController {
 
     @ApiOperation(value = "获取订单")
     @GetMapping("/{id}")
-    public ResponseEntity<OrderDetailDto> getOrder(@ApiParam(value = "订单Id", required = true) @PathVariable Long id){
+    public ResponseEntity<OrderDetailDto> getOrder(@ApiParam(value = "订单Id", required = true) @PathVariable Long id) {
         return success(service.getOrder(id));
     }
 
@@ -73,7 +73,6 @@ public class OrderController {
         service.cancel(id);
         return success();
     }
-
 
 
 }

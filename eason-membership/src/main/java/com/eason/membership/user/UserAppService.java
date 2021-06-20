@@ -1,22 +1,17 @@
 package com.eason.membership.user;
 
-import com.cartisan.constants.CodeMessage;
 import com.cartisan.dtos.PageResult;
-import com.cartisan.exceptions.CartisanException;
+import com.cartisan.utils.SnowflakeIdWorker;
 import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.cartisan.utils.SnowflakeIdWorker;
-
 import javax.transaction.Transactional;
-import java.util.List;
 
 import static com.cartisan.repositories.ConditionSpecifications.querySpecification;
 import static com.cartisan.utils.AssertionUtil.requirePresent;
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class UserAppService {
@@ -49,16 +44,16 @@ public class UserAppService {
     @Transactional(rollbackOn = Exception.class)
     public UserDto addUser(UserParam userParam) {
         final User user = new User(idWorker.nextId(),
-        userParam.getName(),
-        userParam.getAge(),
-        userParam.getAccount(),
-        userParam.getPasswordEncrypt(),
-        userParam.getAddress(),
-        userParam.getTelphone(),
-        userParam.getQq(),
-        userParam.getEmail(),
-        userParam.getWeixin(),
-        userParam.getSex());
+                userParam.getName(),
+                userParam.getAge(),
+                userParam.getAccount(),
+                userParam.getPasswordEncrypt(),
+                userParam.getAddress(),
+                userParam.getTelphone(),
+                userParam.getQq(),
+                userParam.getEmail(),
+                userParam.getWeixin(),
+                userParam.getSex());
 
         return converter.convert(repository.save(user));
     }
@@ -68,15 +63,15 @@ public class UserAppService {
         final User user = requirePresent(repository.findById(id));
 
         user.describe(userParam.getName(),
-        userParam.getAge(),
-        userParam.getAccount(),
-        userParam.getPasswordEncrypt(),
-        userParam.getAddress(),
-        userParam.getTelphone(),
-        userParam.getQq(),
-        userParam.getEmail(),
-        userParam.getWeixin(),
-        userParam.getSex());
+                userParam.getAge(),
+                userParam.getAccount(),
+                userParam.getPasswordEncrypt(),
+                userParam.getAddress(),
+                userParam.getTelphone(),
+                userParam.getQq(),
+                userParam.getEmail(),
+                userParam.getWeixin(),
+                userParam.getSex());
 
         return converter.convert(repository.save(user));
     }

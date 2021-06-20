@@ -3,9 +3,6 @@ package com.eason.order.order.response;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.lang.Long;
-import java.lang.String;
-
 @Data
 public class OrderItemDto {
     @ApiModelProperty(value = "主键")

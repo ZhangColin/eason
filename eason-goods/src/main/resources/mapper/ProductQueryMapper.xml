@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eason.goods.product.mapper.ProductQueryMapper">
+  <select id="findByIds" resultType="com.eason.goods.product.response.ProductDto">
+    select id, category_id as categoryId, merchant_id as merchantId，title,
+    picture_url as pictureUrl, price, stock_number as stockNumber, sell_number as sellNumber,
+    audit_status as auditStatus, audited, status
+    from gds_products
+    where id in
+    <foreach collection="productIds" item="id" index="index"
+             open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
+
+</mapper>

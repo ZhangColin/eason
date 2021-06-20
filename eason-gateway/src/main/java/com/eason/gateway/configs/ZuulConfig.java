@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class ZuulConfig {
     /**
      * 实现 zuul 配置的动态修改
+     *
      * @return
      */
     @ConfigurationProperties("zuul")

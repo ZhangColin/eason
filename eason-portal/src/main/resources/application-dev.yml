@@ -1,5 +1,3 @@
-
-
 logging:
   file:
     path: /Users/colin/logs/eason/portal

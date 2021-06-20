@@ -3,9 +3,6 @@ package com.eason.goods.product.response;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.lang.Long;
-import java.lang.String;
-
 @Data
 public class ProductDetailDto {
     @ApiModelProperty(value = "产品Id")

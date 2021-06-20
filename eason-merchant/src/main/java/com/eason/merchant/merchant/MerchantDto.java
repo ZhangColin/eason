@@ -3,10 +3,6 @@ package com.eason.merchant.merchant;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.lang.Long;
-import java.lang.String;
-import java.lang.Integer;
-
 @Data
 public class MerchantDto {
     @ApiModelProperty(value = "账户Id")

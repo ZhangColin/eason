@@ -31,10 +31,9 @@ public class UserController {
     }
 
     @PostMapping(value = "register")
-    public void register(RegisterCommand command){
+    public void register(RegisterCommand command) {
         userService.register(command);
     }
-
 
 
     @GetMapping(value = "/login.html")
@@ -43,15 +42,14 @@ public class UserController {
     }
 
     @PostMapping(value = "login")
-    public String login(String account, String password, HttpServletRequest request){
+    public String login(String account, String password, HttpServletRequest request) {
         final UserDto user = userService.findByUserName(account);
         if (user == null) {
             log.info("无此用户");
         } else if (user.getPasswordEncrypt().equals(password)) {
             final HttpSession session = request.getSession();
             session.setAttribute("user", user);
-        }
-        else {
+        } else {
             log.info("密码不对");
         }
 

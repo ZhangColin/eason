@@ -1,6 +1,5 @@
 package com.eason.order.order.response;
 
-import com.eason.order.order.response.OrderItemDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

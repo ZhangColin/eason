@@ -40,7 +40,8 @@ public class Merchant extends AbstractEntity implements AggregateRoot {
     @Column(name = "audit_status")
     private Integer auditStatus;
 
-    private Merchant() {}
+    private Merchant() {
+    }
 
     public Merchant(Long id, String name, String shopName, String account, String password, String scope) {
         this.id = id;

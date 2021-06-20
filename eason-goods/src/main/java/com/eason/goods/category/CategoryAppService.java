@@ -7,9 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
 import javax.transaction.Transactional;
-
 import java.util.List;
 
 import static com.cartisan.repositories.ConditionSpecifications.querySpecification;
@@ -44,10 +42,10 @@ public class CategoryAppService {
     @Transactional(rollbackOn = Exception.class)
     public CategoryDto addCategory(CategoryParam categoryParam) {
         final Category category = new Category(categoryParam.getParentId(),
-        categoryParam.getName(),
-        categoryParam.getDescription(),
-        categoryParam.getLevel(),
-        categoryParam.getSort());
+                categoryParam.getName(),
+                categoryParam.getDescription(),
+                categoryParam.getLevel(),
+                categoryParam.getSort());
 
         return converter.convert(repository.save(category));
     }
@@ -57,10 +55,10 @@ public class CategoryAppService {
         final Category category = requirePresent(repository.findById(id));
 
         category.describe(categoryParam.getParentId(),
-        categoryParam.getName(),
-        categoryParam.getDescription(),
-        categoryParam.getLevel(),
-        categoryParam.getSort());
+                categoryParam.getName(),
+                categoryParam.getDescription(),
+                categoryParam.getLevel(),
+                categoryParam.getSort());
 
         return converter.convert(repository.save(category));
     }

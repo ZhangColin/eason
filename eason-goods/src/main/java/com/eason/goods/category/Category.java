@@ -7,10 +7,6 @@ import lombok.Getter;
 
 import javax.persistence.*;
 
-import java.lang.Long;
-import java.lang.String;
-import java.lang.Integer;
-
 @Entity
 @Table(name = "gds_product_categories")
 @Getter
@@ -36,7 +32,8 @@ public class Category extends AbstractEntity implements AggregateRoot {
     @Column(name = "sort")
     private Integer sort;
 
-    private Category() {}
+    private Category() {
+    }
 
     public Category(Long parentId,
                     String name,
@@ -52,10 +49,10 @@ public class Category extends AbstractEntity implements AggregateRoot {
     }
 
     public void describe(Long parentId,
-        String name,
-        String description,
-        Integer level,
-        Integer sort) {
+                         String name,
+                         String description,
+                         Integer level,
+                         Integer sort) {
         this.parentId = parentId;
         this.name = name;
         this.description = description;
