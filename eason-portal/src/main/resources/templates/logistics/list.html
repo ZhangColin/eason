@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title></title>
+</head>
+<body>
+<div th:include="producttype :: producttype" ></div>
+<table border="1">
+	<tr>
+		<td>订单id</td>
+		<td>物流信息</td>
+	</tr>
+	<tr th:each="wuliuinfo: ${wuliulist}">
+		<td th:text="${wuliuinfo.orderid}"></td>
+		<td th:text="${wuliuinfo.currentprocess}"></td>
+	</tr>
+</table>
+</body>
+</html>

@@ -2,7 +2,7 @@ package com.eason.portal.controller;
 
 import com.eason.portal.request.RegisterCommand;
 import com.eason.portal.response.UserDto;
-import com.eason.portal.service.UserService;
+import com.eason.portal.gateway.UserClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +19,10 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/user")
 @Slf4j
 public class UserController {
-    private final UserService userService;
+    private final UserClient userClient;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserClient userClient) {
+        this.userClient = userClient;
     }
 
     @GetMapping(value = "/register.html")
@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping(value = "register")
     public void register(RegisterCommand command) {
-        userService.register(command);
+        userClient.register(command);
     }
 
 
@@ -43,7 +43,7 @@ public class UserController {
 
     @PostMapping(value = "login")
     public String login(String account, String password, HttpServletRequest request) {
-        final UserDto user = userService.findByUserName(account);
+        final UserDto user = userClient.findByUserName(account);
         if (user == null) {
             log.info("无此用户");
         } else if (user.getPasswordEncrypt().equals(password)) {

@@ -61,7 +61,9 @@ public class OrderController {
     @ApiOperation(value = "支付")
     @PutMapping("/{id}/pay")
     public ResponseEntity<?> pay(
-            @ApiParam(value = "订单Id", required = true) @PathVariable Long id) {
+            @ApiParam(value = "订单Id", required = true) @PathVariable Long id,
+            @ApiParam(value = "支付类型", required = true) @RequestParam Integer payType,
+            @ApiParam(value = "支付状态", required = true) @RequestParam Integer status ) {
         service.pay(id);
         return success();
     }

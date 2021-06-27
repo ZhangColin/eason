@@ -2,6 +2,8 @@ package com.eason.payment.service.weixin;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * @author colin
  */

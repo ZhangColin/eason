@@ -1,4 +1,4 @@
-package com.eason.portal.service;
+package com.eason.portal.gateway;
 
 import com.eason.portal.request.RegisterCommand;
 import com.eason.portal.response.UserDto;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author colin
  */
 @FeignClient(value = "eason-membership")
-public interface UserService {
+public interface UserClient {
     @PostMapping(value = "/users/register")
     void register(@RequestBody RegisterCommand command);
 

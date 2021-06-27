@@ -1,11 +1,15 @@
 package com.eason.payment;
 
+import com.eason.payment.gateway.OrderClient;
+import com.eason.payment.gateway.response.OrderDto;
 import com.eason.payment.service.alipay.AliPayService;
 import com.eason.payment.service.unionpay.UnionPayService;
 import com.eason.payment.service.weixin.PayRequest;
 import com.eason.payment.service.weixin.PayResponse;
 import com.eason.payment.service.weixin.WeixinPayService;
 import com.eason.payment.service.weixin.WxPayService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -26,16 +30,19 @@ public class PaymentController {
     private final WeixinPayService weixinPayService;
     private final AliPayService aliPayService;
     private final UnionPayService unionPayService;
+    private final OrderClient orderClient;
     private final ObjectMapper objectMapper;
 
     public PaymentController(
             WeixinPayService weixinPayService,
             AliPayService aliPayService,
             UnionPayService unionPayService,
+            OrderClient orderClient,
             ObjectMapper objectMapper) {
         this.weixinPayService = weixinPayService;
         this.aliPayService = aliPayService;
         this.unionPayService = unionPayService;
+        this.orderClient = orderClient;
         this.objectMapper = objectMapper;
     }
 
@@ -60,7 +67,7 @@ public class PaymentController {
     }
 
     @GetMapping("/auth")
-    public ModelAndView auth(@RequestParam("code") String code, @RequestParam("orderid") int orderid) {
+    public ModelAndView auth(@RequestParam("code") String code, @RequestParam("orderid") Long orderid) throws JsonProcessingException {
         log.info("进入auth方法。。。");
         log.info("code={}", code);
         //https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx705762491229630b&redirect_uri=http://youfan.natapp1.cc/auth?orderid=2&response_type=code&scope=snsapi_base#wechat_redirect
@@ -69,23 +76,22 @@ public class PaymentController {
         String response = restTemplate.getForObject(url, String.class);
         log.info("response={}", response);
 
-        objectMapper.readva(response, JsonObject.class)
-        JSONObject object = JSONObject.parseObject(response);
-        String openid = object.getString("openid");
+        final JsonNode jsonNode = objectMapper.readValue(response, JsonNode.class);
+        String openid = jsonNode.get("openid").asText();
 
         WxPayService wxPayServiceImpl = new WxPayService();
         PayRequest request = new PayRequest();
         request.setOrderName("友凡测试支付");//订单名字
         //订单查询
         request.setOrderId(orderid+"");//订单号
-        Order order = orderService.findorderbyid(orderid);
-        request.setOrderAmount(order.getPayamount());//支付金额
+        OrderDto order = orderClient.getOrder(orderid);
+        request.setOrderAmount(Double.valueOf(order.getPayAmount()));//支付金额
         request.setOpenid(openid);//微信openid, 仅微信支付时需要
 
         PayResponse payResponse = wxPayServiceImpl.pay(request);
 
         log.info("====="+openid);
-        Map<String, Object> map = new HashMap<String,Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("payResponse", payResponse);
         map.put("returnUrl", "http://youfan.natapp1.cc/notify");
         return new ModelAndView("pay/create", map);
@@ -102,7 +108,7 @@ public class PaymentController {
         PayResponse payResponse = wxPayServiceImpl.asyncNotify(notifyData);
         if(payResponse != null && payResponse.getOrderId() != null){
             String orderid = payResponse.getOrderId();
-            orderService.updateorderstatebyid(Integer.valueOf(orderid),1,2);
+            orderClient.pay(Long.valueOf(orderid),1,2);
         }
         //返回给微信处理结果
         return new ModelAndView("pay/success");
