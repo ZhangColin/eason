@@ -1,0 +1,37 @@
+server:
+  port: 9050
+
+spring:
+  application:
+    name: eason-message
+  profiles:
+    include: web, mysql
+    active: local
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+cartisan:
+  info:
+    title: Eason Message
+    serviceUrl: http://www.cartisan.com
+    version: 1.0
+    contact:
+      name: colin
+      url: zhang_colin.github.com
+      email: zhang_colin@163.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
